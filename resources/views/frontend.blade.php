@@ -15,7 +15,7 @@
                     
                     
                     <div class="flex items-center justify-end w-full">
-                        <button" class="mx-4 text-gray-600 focus:outline-none sm:mx-0">
+                        <button class="mx-4 text-gray-600 focus:outline-none sm:mx-0">
                             
                         </button>
                     </div>

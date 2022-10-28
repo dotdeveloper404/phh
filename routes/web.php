@@ -20,14 +20,22 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
+    Route::get('', function() {
+        return view('dashboard.index');
+    })->name('dashboard');
+
+    Route::resource('product', ProductController::class);
+    Route::resource('contact',ContactController::class);
+});
 
 Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
 Route::post('doCheckout',[CheckoutController::class,'doCheckout'])->name('checkout.do_checkout');
 
-Route::resource('contact',ContactController::class);
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('partners', [HomeController::class, 'partners'])->name('home.partners');
 Route::get('how-it-works', [HomeController::class, 'howitworks'])->name('home.howitworks');

@@ -5,6 +5,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,10 +32,13 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
 
     Route::resource('product', ProductController::class);
     Route::resource('contact',ContactController::class);
+    Route::get('order', [OrderController::class, 'index'])->name('order.index');
 });
 
-Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
-Route::post('doCheckout',[CheckoutController::class,'doCheckout'])->name('checkout.do_checkout');
+Route::middleware('auth')->group(function() {
+    Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
+    Route::post('doCheckout',[CheckoutController::class,'doCheckout'])->name('checkout.do_checkout');
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('partners', [HomeController::class, 'partners'])->name('home.partners');

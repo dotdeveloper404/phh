@@ -38,12 +38,12 @@
     </div>
 </section>
 <!-- ALERT MESSAGE BOX - VIEW CART -->
-<div class="view-cart-box">
+<div class="view-cart-box" id="cart-add">
     <div class="icon"><i class="fas fa-check"></i></div>
     <div class="desc">You add item. <a href="/cart">View Cart</a></div>
 </div>
 
-<div class="view-cart-box-update">
+<div class="view-cart-box-update" id="cart-update">
     <div class="icon"><i class="fas fa-check"></i></div>
     <div class="desc">Quantity has beeen updated in cart</div>
 </div>
@@ -68,11 +68,11 @@
         });
         AOS.init();
         $('.btn_add_to_cart').click(function(){
-            $('.view-cart-box').fadeIn(500).delay(4000).fadeOut(500);
+            $('#cart-add').fadeIn(500).delay(4000).fadeOut(500);
         });
 
         $('.btn_update_to_cart').click(function(){
-            $('.view-cart-box-update').fadeIn(500).delay(4000).fadeOut(500);
+            $('#cart-update').fadeIn(500).delay(4000).fadeOut(500);
         });
 
         

@@ -81,7 +81,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h2><img src="{{ asset('assets/images/logo.png') }}" alt=""> <br><span>Gallagher’s</span></h2>
+                    <h2> <br><span>Gallagher’s</span></h2>
                 </div>
             </div>
             <div class="row">
@@ -156,3 +156,29 @@
         </div>
     </section>
 @endsection
+
+
+@pushIf(session()->has('order_placed'), 'scripts')
+    @php
+        $data = Session::get('order_placed');
+    @endphp
+
+    <script>
+        $(function() {
+            @if ($data['success'])
+                swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    html: "{{ $data['message'] }}<br/><b>Code: {{ $data['code'] }}</b>"
+                })
+            @else
+                swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: "{{ $data['message'] }}"
+                })
+                
+            @endif
+        })
+    </script>
+@endPushIf

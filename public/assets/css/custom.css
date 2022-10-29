@@ -4,16 +4,16 @@
     font-family: 'The Bold Font';
     src: url('../fonts/TheBoldFont-Bold.eot');
     src: url('../fonts/TheBoldFont-Bold.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/TheBoldFont-Bold.woff2') format('woff2'),
-    url('../fonts/TheBoldFont-Bold.woff') format('woff'),
-    url('../fonts/TheBoldFont-Bold.ttf') format('truetype'),
-    url('../fonts/TheBoldFont-Bold.svg#TheBoldFont-Bold') format('svg');
+        url('../fonts/TheBoldFont-Bold.woff2') format('woff2'),
+        url('../fonts/TheBoldFont-Bold.woff') format('woff'),
+        url('../fonts/TheBoldFont-Bold.ttf') format('truetype'),
+        url('../fonts/TheBoldFont-Bold.svg#TheBoldFont-Bold') format('svg');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
 
-:root{
+:root {
     --prehappy-red-color: #c5141d;
     --prehappy-white-color: #fff;
     --prehappy-black-color: #000;
@@ -42,27 +42,57 @@
     --prehappy-font-700: 700;
 }
 
-body, html, a, p, form, h1, h2, h3, h4, h5, h6, input, textarea, ul, li, ol{
+body,
+html,
+a,
+p,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea,
+ul,
+li,
+ol {
     margin: 0;
     padding: 0;
-    border:none;
+    border: none;
 }
-ul, li, ol{
+
+ul,
+li,
+ol {
     list-style: none;
 }
-h1, h2, h3, h4, h5, h6{
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'The Bold Font', sans-serif;
 }
-a, a:link{
+
+a,
+a:link {
     text-decoration: none;
 }
-a:hover, a:visited{
+
+a:hover,
+a:visited {
     text-decoration: none;
 }
-body{
+
+body {
     font-family: 'Poppins', sans-serif;
 }
-header{
+
+header {
     display: inline-block;
     width: 100%;
     background: transparent;
@@ -70,17 +100,20 @@ header{
     position: absolute;
     z-index: 1;
 }
-header nav ul{
+
+header nav ul {
     display: block;
     margin-top: 20px;
     text-align: center;
 }
-header nav ul li{
+
+header nav ul li {
     display: inline-block;
     font-size: 14px;
     position: relative;
 }
-header nav ul li::after{
+
+header nav ul li::after {
     content: '';
     position: absolute;
     width: 2px;
@@ -88,33 +121,39 @@ header nav ul li::after{
     background: var(--prehappy-white-color);
     top: 10px;
     right: -2px;
-    }
-header nav ul li:last-child::after{
+}
+
+header nav ul li:last-child::after {
     display: none;
 }
-header nav ul li a{
+
+header nav ul li a {
     display: block;
-    color:var(--prehappy-white-color);
+    color: var(--prehappy-white-color);
     padding: 0 15px;
     border-radius: 5px;
     line-height: 36px;
     transition: all .3s linear;
 }
-header nav ul li a:hover{
+
+header nav ul li a:hover {
     background: var(--prehappy-red-color);
     color: var(--prehappy-white-color);
     transition: all .3s linear;
 }
-.search-login{
+
+.search-login {
     display: inline-block;
     width: 100%;
     text-align: right;
 }
-.search-login .search{
+
+.search-login .search {
     display: inline-block;
 
 }
-.search-login .search svg{
+
+.search-login .search svg {
     display: inline-block;
     background: #000;
     color: #fff;
@@ -123,10 +162,13 @@ header nav ul li a:hover{
     padding: 7px 7px;
     font-weight: 700;
 }
-.search-login .login_register{
+
+.search-login .login_register {
     display: inline-block;
 }
-.search-login .login_register .login, .search-login .login_register .register{
+
+.search-login .login_register .login,
+.search-login .login_register .register {
     display: inline-block;
     background: var(--prehappy-white-color);
     color: var(--prehappy-black-color);
@@ -135,15 +177,21 @@ header nav ul li a:hover{
     padding: 0 10px;
     line-height: 36px;
 }
-.search-login .login_register .login:hover, .search-login .login_register .register:hover{
+
+.search-login .login_register .login:hover,
+.search-login .login_register .register:hover {
     background: var(--prehappy-light-red-color);
     color: var(--prehappy-white-color);
     transition: all .3s linear;
 }
-.search-login .login_register .login svg, .search-login .login_register .register svg{
+
+.search-login .login_register .login svg,
+.search-login .login_register .register svg {
     margin-right: 5px;
 }
-.top-header, .breadcrum-header{
+
+.top-header,
+.breadcrum-header {
     display: inline-block;
     width: 100%;
     position: relative;
@@ -153,14 +201,16 @@ header nav ul li a:hover{
     top: -20px;
     padding-top: 300px;
 }
-.breadcrum-header{
+
+.breadcrum-header {
     background: url("../images/breadcrum-background.jpg") 0 0 no-repeat;
     background-size: cover;
     min-height: 400px;
     padding-top: 200px;
     top: 0;
 }
-.breadcrum-header h1{
+
+.breadcrum-header h1 {
     text-align: center;
     font-size: 4em;
     background: linear-gradient(#fcad2a, #fff);
@@ -168,54 +218,64 @@ header nav ul li a:hover{
     -webkit-text-fill-color: transparent;
     font-family: 'The Bold Font';
 }
-.top-header .parallax-wrapper{
+
+.top-header .parallax-wrapper {
     display: inline-block;
     width: 100%;
     position: relative;
 }
+
 .top-header .parallax-wrapper .parallax-img {
     position: absolute;
     top: 0;
     left: 0;
 }
+
 .mug {
     position: absolute;
     top: -80px;
     left: 250px;
     z-index: 10;
 }
+
 .burger {
     position: absolute;
     top: -10px;
     left: 70px;
     z-index: 11;
 }
+
 .chip1 {
     position: absolute;
     top: -70px;
     left: 0;
 }
+
 .chip2 {
     position: absolute;
     top: -100px;
     left: 280px;
 }
+
 .chip3 {
     position: absolute;
     top: 540px;
     left: 110px;
 }
+
 .chip4 {
     position: absolute;
     bottom: -640px;
     left: 220px;
 }
+
 .chip5 {
     position: absolute;
     top: -110px;
     left: 780px;
 }
-.top-header .parallax-content{
+
+.top-header .parallax-content {
     display: inline-block;
     width: 100%;
     padding-left: 730px;
@@ -223,7 +283,7 @@ header nav ul li a:hover{
     z-index: 20;
 }
 
-.top-header .parallax-content h1{
+.top-header .parallax-content h1 {
     font-size: 8em;
     background: linear-gradient(#fcad2a, #fff);
     -webkit-background-clip: text;
@@ -231,9 +291,10 @@ header nav ul li a:hover{
     font-family: 'The Bold Font';
     line-height: 110px;
 }
-.top-header .parallax-content a{
+
+.top-header .parallax-content a {
     text-transform: capitalize;
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     color: var(--prehappy-white-color);
     margin-top: 20px;
     display: inline-block;
@@ -244,7 +305,7 @@ header nav ul li a:hover{
     font-size: 20px;
 }
 
-.about-section{
+.about-section {
     display: inline-block;
     width: 100%;
     background: url("../images/about-background.jpg") top center no-repeat;
@@ -252,11 +313,13 @@ header nav ul li a:hover{
     background-size: cover;
     margin-top: -20px;
 }
-.about-section .about-wrapper{
+
+.about-section .about-wrapper {
     display: inline-block;
     width: 100%;
 }
-.about-section .about-wrapper h2{
+
+.about-section .about-wrapper h2 {
     font-size: 2em;
     font-family: 'Poppins', sans-serif;
     color: var(--prehappy-black-color);
@@ -264,17 +327,21 @@ header nav ul li a:hover{
     letter-spacing: 5px;
     margin-bottom: 20px;
 }
-.about-section .about-wrapper h2 span{
+
+.about-section .about-wrapper h2 span {
     font-size: 2em;
     font-family: 'The Bold Font', sans-serif;
     letter-spacing: 0;
 }
-.about-section .about-wrapper p{
+
+.about-section .about-wrapper p {
     line-height: 30px;
     font-size: 14px;
     margin-bottom: 20px;
 }
-.about-section .about-wrapper .view-btn, .about-section .about-wrapper .available-btn{
+
+.about-section .about-wrapper .view-btn,
+.about-section .about-wrapper .available-btn {
     display: inline-block;
     padding: 0 20px;
     line-height: 50px;
@@ -283,14 +350,18 @@ header nav ul li a:hover{
     color: var(--prehappy-white-color);
     margin-right: 5px;
 }
-.deals-section, .partners-section, .contactus-section{
+
+.deals-section,
+.partners-section,
+.contactus-section {
     display: inline-block;
     width: 100%;
     background: url("../images/off-white-background.jpg") 0 0 no-repeat;
     padding: 100px 0;
     background-size: cover;
 }
-.deals-section h2{
+
+.deals-section h2 {
     font-size: 2em;
     color: var(--prehappy-black-color);
     line-height: 50px;
@@ -298,17 +369,20 @@ header nav ul li a:hover{
     font-family: 'poppins', sans-serif;
     margin-bottom: 50px;
 }
-.deals-section h2 span{
+
+.deals-section h2 span {
     font-size: 2em;
     font-family: 'The Bold Font', sans-serif;
     margin-top: 20px;
     display: block;
 }
+
 .deals-list {
     display: block;
     position: relative;
 }
-.deals-list::after{
+
+.deals-list::after {
     content: '';
     position: absolute;
     bottom: -110px;
@@ -317,37 +391,52 @@ header nav ul li a:hover{
     width: 540px;
     height: 350px;
 }
+
 .deals-list li {
     display: inline-block;
     width: 48%;
     margin-bottom: 50px;
 }
+
 .deals-list li .list-data {
     display: flex;
 }
+
 /*.list-data .deals-img img{
     box-shadow: 5px 5px 10px 0 #ccc;
 }*/
-.list-data .deals-content{
+.list-data .deals-img {
+    width: 180px;
+}
+
+.list-data .deals-img img {
+    width: 100%;
+}
+
+.list-data .deals-content {
     padding-left: 50px;
     width: 400px;
 }
-.list-data .deals-content h3{
+
+.list-data .deals-content h3 {
     font-family: 'The Bold Font', sans-serif;
     color: var(--prehappy-light-red-color);
     font-size: 2.2em;
     margin-bottom: 15px;
 }
-.list-data .deals-content p{
+
+.list-data .deals-content p {
     margin-bottom: 10px;
     font-size: 14px;
 }
-.list-data .deals-content span{
+
+.list-data .deals-content span {
     font-family: 'The Bold Font', sans-serif;
     font-size: 2em;
     color: var(--prehappy-light-red-color);
 }
-.list-data .deals-content a{
+
+.list-data .deals-content a {
     background: #000;
     color: #fff;
     padding: 0 20px;
@@ -357,7 +446,7 @@ header nav ul li a:hover{
     margin-left: 20px;
 }
 
-.howitwork-section{
+.howitwork-section {
     display: inline-block;
     width: 100%;
     background: url("../images/about-background.jpg") top center no-repeat;
@@ -365,11 +454,13 @@ header nav ul li a:hover{
     background-size: cover;
     margin-top: -20px;
 }
-.howitwork-section .howitwork-wrapper{
+
+.howitwork-section .howitwork-wrapper {
     display: inline-block;
     width: 100%;
 }
-.howitwork-section .howitwork-wrapper h2{
+
+.howitwork-section .howitwork-wrapper h2 {
     font-size: 2em;
     font-family: 'Poppins', sans-serif;
     color: var(--prehappy-black-color);
@@ -377,16 +468,19 @@ header nav ul li a:hover{
     letter-spacing: 5px;
     margin-bottom: 20px;
 }
-.howitwork-section .howitwork-wrapper h2 span{
+
+.howitwork-section .howitwork-wrapper h2 span {
     font-size: 2em;
     font-family: 'The Bold Font', sans-serif;
     letter-spacing: 0;
 }
-.howitwork-section .howitwork-wrapper ul{
+
+.howitwork-section .howitwork-wrapper ul {
     display: block;
     margin-top: 50px;
 }
-.howitwork-section .howitwork-wrapper ul li{
+
+.howitwork-section .howitwork-wrapper ul li {
     display: inline-table;
     width: 32%;
     text-align: center;
@@ -399,25 +493,29 @@ header nav ul li a:hover{
     background: #fff;
     box-shadow: 2px 2px 5px #ccc;
 }
-.howitwork-section .howitwork-wrapper ul li span{
+
+.howitwork-section .howitwork-wrapper ul li span {
     display: block;
     font-size: 2em;
     font-weight: 900;
     margin-bottom: 20px;
     color: #c5141d;
 }
-.howitwork-section .howitwork-wrapper ul li p{
+
+.howitwork-section .howitwork-wrapper ul li p {
     font-size: 1.2em;
     margin-bottom: 0;
     line-height: normal;
     font-weight: 500;
 }
-.howitwork-section .howitwork-wrapper ul li svg{
+
+.howitwork-section .howitwork-wrapper ul li svg {
     font-size: 3em;
     margin-bottom: 30px;
     color: #c5141d;
 }
-.howitwork-section .howitwork-wrapper p{
+
+.howitwork-section .howitwork-wrapper p {
     line-height: 30px;
     font-size: 14px;
     margin-bottom: 20px;
@@ -425,32 +523,37 @@ header nav ul li a:hover{
 
 
 
-.beer-section{
+.beer-section {
     display: inline-block;
     width: 100%;
     background: url("../images/beer-bottle-background.jpg") top center no-repeat;
     padding: 170px 0 150px;
     color: var(--prehappy-white-color);
 }
-.beer-section .beer-content{
+
+.beer-section .beer-content {
     display: block;
 }
-.beer-section .beer-content h2{
+
+.beer-section .beer-content h2 {
     font-size: 2em;
     font-family: 'poppins', sans-serif;
     line-height: 50px;
     margin-bottom: 20px;
 }
-.beer-section .beer-content h2 span{
+
+.beer-section .beer-content h2 span {
     font-size: 2em;
     font-family: 'The Bold Font', sans-serif;
 }
-.beer-section .beer-content p{
+
+.beer-section .beer-content p {
     line-height: 30px;
     font-size: 18px;
     margin-bottom: 20px;
 }
-.beer-section .beer-content a{
+
+.beer-section .beer-content a {
     display: inline-block;
     padding: 0 20px;
     color: var(--prehappy-white-color);
@@ -458,7 +561,8 @@ header nav ul li a:hover{
     background: var(--prehappy-red-color);
     line-height: 40px;
 }
-.beer-img-content .circle{
+
+.beer-img-content .circle {
     display: inline-block;
     position: absolute;
     z-index: 11;
@@ -475,24 +579,28 @@ header nav ul li a:hover{
     margin-left: 120px;
     margin-top: -120px;
 }
-.beer-img-content img{
+
+.beer-img-content img {
     position: relative;
     z-index: 12;
 }
 
-.testimonials-section{
+.testimonials-section {
     display: inline-block;
     width: 100%;
 }
-.testimonials-section .background-img{
-   background: url("../images/testimonials-img.jpg") 0 0 no-repeat;
+
+.testimonials-section .background-img {
+    background: url("../images/testimonials-img.jpg") 0 0 no-repeat;
     background-size: cover;
 }
-.testimonials-section .background-color{
+
+.testimonials-section .background-color {
     background: var(--prehappy-white-color);
     position: relative;
 }
-.testimonials-section .background-color::after{
+
+.testimonials-section .background-color::after {
     position: absolute;
     content: '"';
     background: #c5141d;
@@ -506,57 +614,69 @@ header nav ul li a:hover{
     text-align: center;
     line-height: 115px;
 }
-.testimonials-section .review-wrapper{
+
+.testimonials-section .review-wrapper {
     display: block;
     padding: 100px 0 100px 100px;
 }
-.testimonials-section .review-wrapper h2{
+
+.testimonials-section .review-wrapper h2 {
     font-size: 4em;
     font-family: 'The Bold Font', sans-serif;
     color: #646161;
     line-height: 80px;
     margin-bottom: 50px;
 }
-.testimonials-section .review-wrapper h2 span{
+
+.testimonials-section .review-wrapper h2 span {
     font-size: 1.6em;
     color: #c5141d;
 }
-.review-carousel{
+
+.review-carousel {
     display: block;
 
 }
-.review-carousel li p{
+
+.review-carousel li p {
     font-size: 26px;
     margin-bottom: 40px;
     color: #545454;
     line-height: 30px;
     font-style: italic;
 }
-.review-carousel li h3{
+
+.review-carousel li h3 {
     color: #ee443f;
     font-family: 'Playfair Display', sans-serif;
 }
-.review-carousel .bx-wrapper{
+
+.review-carousel .bx-wrapper {
     box-shadow: none;
     border: none;
 }
-.partner-container{
+
+.partner-container {
     display: inline-block;
     width: 100%;
     margin-bottom: 50px;
 }
-.partner-container h1{
+
+.partner-container h1 {
     margin-bottom: 10px;
     font-size: 2.5em;
     font-weight: 900;
     margin-top: 20px;
 }
-.partner-container p{
+
+.partner-container p {
     font-size: 14px;
 }
+
 .contact-wrapper {
     position: relative;
 }
+
 .contact-detail {
     position: relative;
     background: #333;
@@ -567,63 +687,79 @@ header nav ul li a:hover{
     width: 35%;
     display: inline-block;
 }
-.contact-detail ul{
+
+.contact-detail ul {
     display: block;
 }
-.contact-detail ul li{
+
+.contact-detail ul li {
     display: block;
     margin-bottom: 30px;
     padding-left: 50px;
     font-size: 14px;
 }
-.contact-detail ul li h3{
+
+.contact-detail ul li h3 {
     font-size: 21px;
     text-transform: uppercase;
     margin: 0;
 }
-.contact-detail ul li:first-child{
+
+.contact-detail ul li:first-child {
     background: url(../images/email-icon.png) 0 0 no-repeat;
 }
-.contact-detail ul li:nth-child(2){
+
+.contact-detail ul li:nth-child(2) {
     background: url(../images/map-location-icon.png) 0 0 no-repeat;
 }
-.contact-detail ul li:last-child{
+
+.contact-detail ul li:last-child {
     background: url(../images/phone-icon.png) 0 0 no-repeat;
 }
-.contact-faq{
+
+.contact-faq {
     display: block;
 }
-.contact-faq span{
+
+.contact-faq span {
     font-size: 21px;
 }
-.contact-faq h2{
+
+.contact-faq h2 {
     font-size: 3em;
     margin-bottom: 20px;
 }
-.contact-faq h2 span{
+
+.contact-faq h2 span {
     color: var(--prehappy-red-color);
     font-size: 1em;
 }
-.contact-faq p{
+
+.contact-faq p {
     font-size: 16px;
 }
-.contact-form{
+
+.contact-form {
     display: inline-block;
     width: 100%;
     top: -300px;
     position: relative;
 }
-.contact-form input[type=text], .contact-form textarea{
+
+.contact-form input[type=text],
+.contact-form textarea {
     background: var(--prehappy-white-color);
     border-radius: 50px;
     padding: 15px 10px 15px 30px;
     width: 100%;
     margin-bottom: 10px;
 }
-.contact-form input[type=text]:focus{
+
+.contact-form input[type=text]:focus {
     outline: none;
 }
-.contact-form button{
+
+.contact-form button {
     background: var(--prehappy-red-color);
     border-radius: 5px;
     padding: 0 20px;
@@ -635,34 +771,40 @@ header nav ul li a:hover{
 
 
 
-footer{
+footer {
     display: inline-block;
     width: 100%;
     background: var(--prehappy-black-color);
     padding: 50px 0;
     color: var(--prehappy-white-color);
 }
-footer h3{
+
+footer h3 {
     font-size: 1.5em;
     margin-bottom: 20px;
 }
-footer img{
+
+footer img {
     margin-bottom: 20px;
 }
-footer p{
+
+footer p {
     font-size: 14px;
 }
-footer .footer-links{
+
+footer .footer-links {
     display: block;
 }
-footer .footer-links li{
+
+footer .footer-links li {
     display: block;
     font-size: 14px;
     margin-bottom: 10px;
     position: relative;
     padding-left: 20px;
 }
-footer .footer-links li::before{
+
+footer .footer-links li::before {
     content: '';
     position: absolute;
     width: 10px;
@@ -671,11 +813,12 @@ footer .footer-links li::before{
     top: 9px;
     left: 0;
 }
-footer .footer-links li a{
+
+footer .footer-links li a {
     color: var(--prehappy-white-color);
 }
 
-.footer-bottom{
+.footer-bottom {
     display: inline-block;
     width: 100%;
     background: var(--prehappy-black-color);
@@ -685,7 +828,7 @@ footer .footer-links li a{
     border-top: 1px solid #333;
 }
 
-.view-cart-box {
+.view-cart-box, .view-cart-box-update {
     position: fixed;
     top: 10px;
     right: 10px;
@@ -699,7 +842,9 @@ footer .footer-links li a{
     display: none;
     box-shadow: 0 5px 5px #ccc;
 }
-.view-cart-box .icon{
+
+.view-cart-box .icon,
+.view-cart-box-update .icon {
     display: inline-block;
     width: 15%;
     line-height: 50px;
@@ -708,20 +853,28 @@ footer .footer-links li a{
     border-right: 1px solid lightgreen;
     background: darkgreen;
 }
-.view-cart-box .icon svg{
+
+.view-cart-box .icon svg,
+.view-cart-box-update .icon svg {
     font-size: 24px;
 }
-.view-cart-box .desc{
+
+.view-cart-box .desc,
+.view-cart-box-update .desc {
     display: inline-block;
     width: 70%;
     padding: 13px 0 0 20px;
     font-size: 15px;
     color: #000;
 }
-.view-cart-box .desc a{
+
+.view-cart-box .desc a,
+.view-cart-box-update .desc a {
     color: #000;
 }
-.view-cart-box .desc a:hover{
+
+.view-cart-box .desc a:hover,
+.view-cart-box-update .desc a:hover {
     text-decoration: underline;
 }
 
@@ -730,52 +883,26 @@ footer .footer-links li a{
 
 
 /* RESPONSIVE CSS */
-@media (min-width: 1300px) and (max-width: 1440px){
-    header nav ul li{
+@media (min-width: 1300px) and (max-width: 1440px) {
+    header nav ul li {
         font-size: 12px;
     }
-    .beer-section{
+
+    .beer-section {
         padding: 170px 0 100px;
     }
-    .view-cart-box{
+
+    .view-cart-box, .view-cart-box-update {
         width: 30%;
     }
-    .deals-list::after{
+
+    .deals-list::after {
         right: -50px;
     }
 }
-@media (min-width: 1200px) and (max-width: 1300px){
 
-}
-@media (min-width: 1024px) and (max-width: 1200px){
+@media (min-width: 1200px) and (max-width: 1300px) {}
 
-}
-@media (min-width: 992px) and (max-width: 1024px){
+@media (min-width: 1024px) and (max-width: 1200px) {}
 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media (min-width: 992px) and (max-width: 1024px) {}

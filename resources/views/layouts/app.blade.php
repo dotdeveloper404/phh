@@ -11,11 +11,13 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+   
     <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 </head>
 
 <body class="font-sans antialiased">

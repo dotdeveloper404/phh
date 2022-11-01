@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', 'Checkout')
+
 @section('content')
     <section class="deals-section">
         <div class="container">

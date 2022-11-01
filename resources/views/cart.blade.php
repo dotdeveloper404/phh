@@ -1,5 +1,6 @@
 @extends('app')
 
+@section('title', 'Cart')
 
 @section('content')
     <section class="deals-section">
@@ -23,11 +24,12 @@
             <div class="flex justify-center my-6">
                 <div class="p-4 flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
                     @if ($message = Session::get('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ $message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
                     @endif
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        {{-- {{ $message }} --}}
+                        asddas
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
 
                     <div class="flex-1">
                         <table class="table table-striped" cellspacing="0">

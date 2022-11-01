@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.bxslider.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/aos.css') }}">
 
+    <title>@yield('title') | {{ config('app.name') }}</title>
+
     @vite(['resources/js/app.js'])
 
     @stack('styles')

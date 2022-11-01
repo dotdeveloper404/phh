@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', 'Products')
+
 @section('content')
     <div class="container px-6 mx-auto">
         <h3 class="text-2xl font-medium text-gray-700">Product List</h3>

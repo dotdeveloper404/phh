@@ -2,16 +2,16 @@
     <div class="container">
         <div class="row">
             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                <img src="{{asset('assets/images/logo.png')}}" alt="">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetti ng  and0 industry. </p>
+                <img src="{{ asset('assets/images/logo.png') }}" alt="">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetti ng and0 industry. </p>
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{{route('home.about')}}">About Us</a></li>
-                    <li><a  href="{{route('home.bestdeals')}}">Best Deal</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{{ route('home.index') }}">Home</a></li>
+                    <li><a href="{{ route('home.about') }}">About Us</a></li>
+                    <li><a href="{{ route('home.bestdeals') }}">Best Deal</a></li>
+                    <li><a href="{{ route('home.contact') }}">Contact Us</a></li>
                 </ul>
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
@@ -32,7 +32,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xxl-12">
-                <p>Copyright &copy; {{date('Y')}} Pre Happy Hour - All Rights Reserved.</p>
+                <p>Copyright &copy; {{ date('Y') }} Pre Happy Hour - All Rights Reserved.</p>
             </div>
         </div>
     </div>
@@ -47,22 +47,14 @@
     <div class="icon"><i class="fas fa-check"></i></div>
     <div class="desc">Quantity has beeen updated in cart</div>
 </div>
-<script src="{{asset('assets/js/jquery-3.6.1.min.js')}}"></script>
-<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/all.min.js')}}"></script>
-<script src="{{asset('assets/js/fontawesome.min.js')}}"></script>
-<script src="{{asset('assets/js/jquery.bxslider.min.js')}}"></script>
-<script src="{{asset('assets/js/aos.js')}}"></script>
+<script src="{{ asset('assets/js/jquery-3.6.1.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/all.min.js') }}"></script>
+<script src="{{ asset('assets/js/fontawesome.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.bxslider.min.js') }}"></script>
+<script src="{{ asset('assets/js/aos.js') }}"></script>
 <script type="application/javascript">
     $(document).ready(function () {
-        //var scene = document.getElementById('scene');
-        //var parallaxInstance = new Parallax(scene, {
-          //  relativeInput: true
-        //});
-        //$('.parallaxie').parallaxie({
-        //    speed: .4,
-        //    offset: 50
-        //});
         $('.bxslider').bxSlider({
             auto: true
         });
@@ -78,4 +70,3 @@
         
     })
 </script>
-

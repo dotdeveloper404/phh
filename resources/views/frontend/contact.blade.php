@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', 'Contact us')
+
 @section('content')
     <section class="breadcrum-header">
         <div class="container">

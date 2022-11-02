@@ -29,7 +29,7 @@ class ProductController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:30'],
             'price' => ['required', 'numeric', 'min:1'],
-            'image' => ['image'],
+            'image' => ['mimes:jpg,jpeg,png'],
             'description' => ['string', 'max:50']
         ]);
 

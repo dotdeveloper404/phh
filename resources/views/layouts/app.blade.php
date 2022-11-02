@@ -22,7 +22,7 @@
     @stack('styles')
 </head>
 
-<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true"
+<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="false"
     data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
     data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
@@ -135,14 +135,17 @@
                     data-kt-drawer-overlay="true" data-kt-drawer-width="225px" data-kt-drawer-direction="start">
 
                     <!--begin::Logo-->
-                    <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
+                    <div class="app-sidebar-logo justify-content-center p-6" id="kt_app_sidebar_logo"
+                        style="height: unset !important">
 
                         <!--begin::Logo image-->
                         <a href="{{ route('home.index') }}">
-                            <img alt="Logo" src="{{ asset('dashboard-assets/media/logos/default-dark.svg') }}"
-                                class="h-25px app-sidebar-logo-default" />
-                            <img alt="Logo" src="{{ asset('dashboard-assets/media/logos/default-small.svg') }}"
-                                class="h-20px app-sidebar-logo-minimize" />
+
+                            <img alt="Logo" src="{{ asset('dashboard-assets/media/logos/default-logo.png') }}"
+                                class="w-125px app-sidebar-logo-default" />
+                            <img alt="Logo" src="{{ asset('dashboard-assets/media/logos/small-logo.png') }}"
+                                class="h-20px w-30px app-sidebar-logo-minimize" />
+
                         </a>
                         <!--end::Logo image-->
 
@@ -188,10 +191,11 @@
 
                                 {{-- Dashboard --}}
                                 <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('dashboard') }}">
+                                    <a class="menu-link @route('dashboard') active @endroute"
+                                        href="{{ route('dashboard') }}">
                                         <span class="menu-icon">
                                             <span class="svg-icon svg-icon-2">
-                                                <i class="bi bi-grid-fill" style="font-size: 15px"></i>
+                                                <i class="bi bi-grid-fill fs-2"></i>
                                             </span>
                                         </span>
                                         <span class="menu-title">Dashboard</span>
@@ -200,24 +204,11 @@
 
                                 {{-- Products --}}
                                 <div data-kt-menu-trigger="click"
-                                    class="menu-item {{ request()->routeIs('product.*') ?? 'show' }} menu-accordion">
+                                    class="menu-item menu-accordion @route('product.*') show @endroute">
                                     <span class="menu-link">
                                         <span class="menu-icon">
                                             <span class="svg-icon svg-icon-2">
-                                                <svg width="24" height="24" viewBox="0 0 24 24"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect x="2" y="2" width="9"
-                                                        height="9" rx="2" fill="currentColor" />
-                                                    <rect opacity="0.3" x="13" y="2"
-                                                        width="9" height="9" rx="2"
-                                                        fill="currentColor" />
-                                                    <rect opacity="0.3" x="13" y="13"
-                                                        width="9" height="9" rx="2"
-                                                        fill="currentColor" />
-                                                    <rect opacity="0.3" x="2" y="13"
-                                                        width="9" height="9" rx="2"
-                                                        fill="currentColor" />
-                                                </svg>
+                                                <i class="bi bi-bag-plus-fill fs-2"></i>
                                             </span>
                                         </span>
                                         <span class="menu-title">Products</span>
@@ -226,23 +217,42 @@
 
                                     <div class="menu-sub menu-sub-accordion">
                                         <div class="menu-item">
-                                            <a class="menu-link active" href="index.html">
+                                            <a class="menu-link @route('product.index') active @endroute"
+                                                href="{{ route('product.index') }}">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Default</span>
+                                                <span class="menu-title">Listings</span>
                                             </a>
                                         </div>
                                         <div class="menu-item">
-                                            <a class="menu-link" href="dashboards/ecommerce.html">
+                                            <a class="menu-link @route(['product.create', 'product.edit']) active @endroute"
+                                                href="{{ route('product.create') }}">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">eCommerce</span>
+                                                <span class="menu-title">Add</span>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
+
+                                {{-- Orders --}}
+                                <div class="menu-item">
+                                    <a class="menu-link @route('order.index') active @endroute" href="{{ route('order.index') }}">
+                                        <span class="menu-icon">
+                                            <span class="svg-icon svg-icon-2">
+                                                <i class="bi bi-cart-check-fill fs-2"></i>
+                                            </span>
+                                        </span>
+                                        <span class="menu-title">Orders</span>
+                                    </a>
+                                </div>
+
+
+
+
+
 
                                 <!--Simple link-->
                                 {{-- <div class="menu-item">
@@ -328,7 +338,8 @@
                         <a href="javascript:void(0)" onclick="$('#logoutForm').submit()"
                             class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100">
                             <span class="btn-label me-3">Logout</span>
-                            <i class="bi bi-box-arrow-right" style="font-size: 15px"></i>
+                            <i class="bi bi-box-arrow-right"
+                                style="font-size: 15px; padding-right: 0 !important;"></i>
                         </a>
                     </div>
                     <form action="{{ route('logout') }}" method="post" id="logoutForm">@csrf</form>
@@ -355,31 +366,38 @@
 
                                     <!--begin::Title-->
                                     <h1
-                                        class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                                        Default
+                                        class="page-heading d-flex text-dark fw-bold flex-column justify-content-center my-0">
+                                        {{ $title ?? '' }}
                                     </h1>
                                     <!--end::Title-->
 
                                     <!--begin::Breadcrumb-->
-                                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                                        <!--begin::Item-->
-                                        <li class="breadcrumb-item text-muted">
-                                            <a href="index.html" class="text-muted text-hover-primary">Home</a>
-                                        </li>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <li class="breadcrumb-item">
-                                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                                        </li>
-                                        <!--end::Item-->
-                                        <!--begin::Item-->
-                                        <li class="breadcrumb-item text-muted">Dashboards</li>
-                                        <!--end::Item-->
-                                    </ul>
+                                    @isset($breadcrumbs)
+                                        <ul class="breadcrumb breadcrumb-dot fw-semibold fs-7 my-0 pt-1">
+                                            @foreach ($breadcrumbs as $b)
+                                                @if ($b['link'])
+                                                    <li class="breadcrumb-item pe-3">
+                                                        <a href="{{ $b['link'] }}"
+                                                            class="text-primary text-hover-dark">{{ $b['name'] }}</a>
+                                                    </li>
+                                                @else
+                                                    <li class="breadcrumb-item pe-3 text-muted">{{ $b['name'] }}</li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    @endisset
                                     <!--end::Breadcrumb-->
 
                                 </div>
                                 <!--end::Page title-->
+
+                                @if (isset($addButton) && $addButton)
+                                    <div>
+                                        <a class="btn btn-primary" href="{{ $btn['link'] }}">
+                                            {{ $btn['text'] }}
+                                        </a>
+                                    </div>
+                                @endif
 
                             </div>
                             <!--end::Toolbar container-->
@@ -388,11 +406,13 @@
                         <!--end::Toolbar-->
 
                         <!--begin::Content-->
-                        <div id="kt_app_content" class="app-content flex-column-fluid">
+                        <div id="kt_app_content" class="app-content flex-column-fluid bg-white">
 
                             <!--begin::Content container-->
                             <div id="kt_app_content_container" class="app-container container-fluid">
+
                                 @yield('content')
+
                             </div>
                             <!--end::Content container-->
 

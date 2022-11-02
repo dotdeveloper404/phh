@@ -56,7 +56,8 @@
 <script type="application/javascript">
     $(document).ready(function () {
         $('.bxslider').bxSlider({
-            auto: true
+            auto: true,
+            controls: false
         });
         AOS.init();
         $('.btn_add_to_cart').click(function(){

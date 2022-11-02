@@ -1,64 +1,99 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.guest')
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+@section('title', 'Register')
 
-            <!-- Name -->
-            <div>
-                <x-input-label for="name" :value="__('Name')" />
+@section('content')
+    <!--begin::Authentication - Sign-up -->
+    <div class="d-flex justify-content-center">
+        <!--begin::Body-->
+        <div class="d-flex flex-center w-lg-50 p-10">
+            <!--begin::Card-->
+            <div class="card rounded-3 w-md-550px">
+                <!--begin::Card body-->
+                <div class="card-body p-10 p-lg-20">
+                    <!--begin::Form-->
+                    <form class="form w-100" id="kt_sign_up_form" action="{{ route('register') }}" method="POST">
+                        @csrf
+                        <!--begin::Heading-->
+                        <div class="text-center mb-11">
+                            <!--begin::Title-->
+                            <h1 class="text-dark fw-bolder mb-3">Sign Up</h1>
+                            <!--end::Title-->
+                        </div>
+                        <!--begin::Heading-->
 
-                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Name-->
+                            <input type="text" placeholder="Name" name="name" value="{{ old('name') }}"
+                                class="form-control bg-transparent @error('name') is-invalid @enderror" required />
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <!--end::Name-->
+                        </div>
+                        <!--end::Input group=-->
 
-                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Email-->
+                            <input type="email" placeholder="Email" name="email" value="{{ old('email') }}"
+                                class="form-control bg-transparent @error('email') is-invalid @enderror" required />
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <!--end::Email-->
+                        </div>
+                        <!--end::Input group=-->
+
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Password-->
+                            <input type="password" placeholder="Password" name="password"
+                                class="form-control bg-transparent @error('password') is-invalid @enderror" required />
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <!--end::Password-->
+                        </div>
+                        <!--end::Input group=-->
+
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Pwd confirm-->
+                            <input type="password" placeholder="Confirm Password" name="password_confirmation"
+                                class="form-control bg-transparent" required />
+                            <!--end::Pwd confirm-->
+                        </div>
+                        <!--end::Input group=-->
+
+                        <!--begin::Submit button-->
+                        <div class="d-grid mb-10">
+                            <button type="submit" id="kt_sign_up_submit" class="btn btn-primary">
+                                Sign up
+                            </button>
+                        </div>
+                        <!--end::Submit button-->
+
+                        <!--begin::Sign up-->
+                        <div class="text-gray-500 text-center fw-semibold fs-6">Already have an Account?
+                            <a href="{{ route('login') }}" class="link-primary fw-semibold">Sign in</a>
+                        </div>
+                        <!--end::Sign up-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Card body-->
             </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-primary-button class="ml-4">
-                    {{ __('Register') }}
-                </x-primary-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+            <!--end::Card-->
+        </div>
+        <!--end::Body-->
+    </div>
+    <!--end::Authentication - Sign-up-->
+@endsection

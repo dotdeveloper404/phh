@@ -2,7 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="">
+                <a href="{{ route('home.index') }}">
+                    <img src="{{ asset('assets/images/logo.png') }}" alt="">
+                </a>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetti ng and0 industry. </p>
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
@@ -43,11 +45,13 @@
     <div class="desc">You add item. <a href="/cart">View Cart</a></div>
 </div>
 
-<div class="view-cart-box-update" id="cart-update">
+<div class="view-cart-box" id="cart-update">
     <div class="icon"><i class="fas fa-check"></i></div>
     <div class="desc">Quantity has beeen updated in cart</div>
 </div>
+
 <script src="{{ asset('assets/js/jquery-3.6.1.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/all.min.js') }}"></script>
 <script src="{{ asset('assets/js/fontawesome.min.js') }}"></script>

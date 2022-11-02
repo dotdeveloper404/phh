@@ -18,7 +18,7 @@ class CheckoutController extends Controller
         }
         $products = Product::all();
         $cartItems = $cart->all();
-        return view('checkout', compact('cartItems','products'));
+        return view('frontend.checkout', compact('cartItems','products'));
     }
 
     public function doCheckout(Request $request) {

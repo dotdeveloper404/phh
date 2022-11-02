@@ -1,11 +1,6 @@
 <?php
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\{CartController, CheckoutController, ContactController, ProductController, HomeController, OrderController};
 use Illuminate\Support\Facades\Route;
 
 /*

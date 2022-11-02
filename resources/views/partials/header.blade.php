@@ -1,6 +1,6 @@
 <header>
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
                 <div class="logo">
                     <a href="{{ route('home.index') }}">
@@ -8,9 +8,17 @@
                     </a>
                 </div>
             </div>
+
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                 <nav>
-                    <ul>
+                    <div class="three">
+                        <div class="hamburger" id="hamburger-1">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <ul class="menu">
                         <li><a href="{{ route('home.index') }}">Home</a></li>
                         <li><a href="{{ route('home.howitworks') }}">How to Pre Happy Hour</a></li>
                         <li><a href="{{ route('home.bestdeals') }}">Best Deals</a></li>
@@ -19,46 +27,43 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 align-self-center">
                 <div class="search-login">
-                    <div class="search">
-                        <i class="fas fa-search"></i>
-                    </div>
+                    @auth
+                        <div class="dropdown login_register">
+                            <a class="btn btn-secondary dropdown-toggle login" href="#" role="button"
+                                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                                {{ auth()->user()->name }}
+                            </a>
 
-                    @if (Route::has('login'))
-                        <div class="login_register">
-                            @auth
-                                <a href="{{ url('/dashboard') }}" class="login">
-                                    <i class="fas fa-user"></i>
-                                    Dashboard
-                                </a>
-                            @else
-                                <a href="{{ url('/login') }}" class="login">
-                                    <i class="fas fa-user"></i>
-                                    Login
-                                </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="$('#logout-form').submit()">Logout</a></li>
+                                <form action="{{ route('logout') }}" method="post" id="logout-form">@csrf</form>
+                            </ul>
 
-                                @if (Route::has('register'))
-                                    <a href="{{ url('/register') }}" class="register">
-                                        <i class="fas fa-user"></i>
-                                        Register
-                                    </a>
-                                @endif
-
-                            @endauth
+                            <a href="{{ route('cart.list') }}" class="register position-relative">
+                                <i class="fas fa-cart-shopping"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                    {{ count(Cart::getContent()) }}
+                                </span>
+                            </a>
                         </div>
-                    @endif
-                    <div class="login_register" style="    width: 25px;float: right;">
-                        <a href="{{ route('cart.list') }}" class="flex items-center">
-                            <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                <path
-                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                                </path>
-                            </svg>
-                            <span> {{ Cart::getTotalQuantity() }}</span>
-                        </a>
-                    </div>
+                    @else
+                        <div class="login_register">
+                            <a href="{{ route('login') }}" class="login">
+                                <i class="fas fa-user"></i>
+                                Login
+                            </a>
+
+                            <a href="{{ route('register') }}" class="register">
+                                <i class="fas fa-user"></i>
+                                Register
+                            </a>
+                        </div>
+                    @endauth
                 </div>
             </div>
         </div>

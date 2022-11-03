@@ -5,6 +5,9 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,16 +21,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
+    Route::get('', function () {
+        return view('dashboard.index');
+    })->name('dashboard');
 
+    Route::resource('product', ProductController::class);
+    Route::resource('contact', ContactController::class, [
+        'only' => ['index', 'store', 'destroy']
+    ]);
+    Route::get('order', [OrderController::class, 'index'])->name('order.index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    
+});
 
-Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
-Route::post('doCheckout',[CheckoutController::class,'doCheckout'])->name('checkout.do_checkout');
+Route::middleware('auth')->group(function () {
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('doCheckout', [CheckoutController::class, 'doCheckout'])->name('checkout.do_checkout');
+  
+});
 
-Route::resource('contact',ContactController::class);
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('partners', [HomeController::class, 'partners'])->name('home.partners');
 Route::get('how-it-works', [HomeController::class, 'howitworks'])->name('home.howitworks');
@@ -42,5 +57,4 @@ Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.up
 Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

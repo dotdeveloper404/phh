@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    
+
     public function index()
     {
 
         $products = Product::all();
-            return view('frontend.index',compact('products'));
+        return view('frontend.index', compact('products'));
     }
 
     public function about()
@@ -38,6 +38,6 @@ class HomeController extends Controller
     public function bestdeals()
     {
         $products = Product::all();
-        return view('frontend.best-deals',compact('products'));
+        return view('frontend.best-deals', compact('products'));
     }
 }

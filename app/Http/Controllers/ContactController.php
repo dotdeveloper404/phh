@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use App\Models\ContactLead;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -13,7 +15,9 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.leads.index', [
+            'leads' => ContactLead::orderByDesc('created_at')->get() ?? null
+        ]);
     }
 
     /**
@@ -34,7 +38,19 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            "name" => ['required', 'string'],
+            "email" => ['required', 'email'],
+            "phone" => ['required', 'string'],
+            "message" => ['string'],
+        ]);
+
+        try {
+            ContactLead::create($data);
+        } catch (Exception $e) {
+            return back()->with('form-submitted', false);
+        }
+        return back()->with('form-submitted', true);
     }
 
     /**
@@ -77,8 +93,18 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ContactLead $cl)
     {
-        //
+        try {
+            $cl->delete();
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th->getMessage()
+            ]);
+        }
+        return response()->json([
+            'success' => true
+        ]);
     }
 }

@@ -12,6 +12,7 @@
             </div>
         </div>
     </section>
+
     <section class="howitwork-section">
         <div class="container">
             <div class="row">
@@ -24,12 +25,6 @@
                             start preparing your food.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    <section class="howitwork-section">
-        <div class="container">
-            <div class="row">
                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="howitwork-wrapper" data-aos="fade-down">
                         <h2>How to <br><span>Pre Happy Hour</span></h2>

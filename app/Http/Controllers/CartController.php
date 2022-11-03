@@ -14,7 +14,7 @@ class CartController extends Controller
     {
         $products = Product::all();
         $cartItems = \Cart::getContent();
-        return view('cart', compact('cartItems','products'));
+        return view('frontend.cart', compact('cartItems','products'));
 
     }
 

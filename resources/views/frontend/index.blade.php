@@ -31,6 +31,7 @@
             </div>
         </div>
     </section>
+
     <section class="about-section">
         <div class="container">
             <div class="row">
@@ -40,7 +41,7 @@
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="about-wrapper" data-aos="fade-left">
-                        <h2>How to <br><span>pre happy hour</span></h2>
+                        <h2>What is <br><span>pre happy hour</span></h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -56,6 +57,56 @@
             </div>
         </div>
     </section>
+
+    <section class="howitwork-section beer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="howitwork-wrapper">
+                        <h2 data-aos="fade-right">How to <br><span>Pre Happy Hour</span></h2>
+                        <ul data-aos="fade-down">
+                            <li>
+                                <span>Step1:</span>
+                                <i class="fas fa-sign-in-alt"></i>
+                                <p>Sign up and Register</p>
+                            </li>
+                            <li>
+                                <span>Step2:</span>
+                                <i class="fas fa-utensils"></i>
+                                <p>Select bar/restaurant</p>
+                            </li>
+                            <li>
+                                <span>Step3:</span>
+                                <i class="fas fa-hamburger"></i>
+                                <p>Select Drinks and Food</p>
+                            </li>
+                            <li>
+                                <span>Step4:</span>
+                                <i class="fas fa-credit-card"></i>
+                                <p>Pay</p>
+                            </li>
+                            <li>
+                                <span>Step5:</span>
+                                <i class="fas fa-envelope"></i>
+                                <p>Receive text / email with 6 digit code</p>
+                            </li>
+                            <li>
+                                <span>Step6:</span>
+                                <i class="fas fa-id-card"></i>
+                                <p>Present to ID and provide 6 <br>digit code to server or bartender</p>
+                            </li>
+                            <li>
+                                <span>Step7:</span>
+                                <i class="fas fa-couch"></i>
+                                <p>Relax and Enjoy</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="beer-section">
         <div class="container">
             <div class="row">
@@ -77,7 +128,8 @@
             </div>
         </div>
     </section>
-    <section class="deals-section">
+
+    {{-- <section class="deals-section">
         <div class="container">
             <div class="row">
                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -112,12 +164,14 @@
                                 </div>
                             </li>
                         @endforeach
-
                     </ul>
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
+
+    <x-deals-section :$products></x-deals-section>
+
     <section class="testimonials-section">
         <div class="container-fluid">
             <div class="row">
@@ -177,7 +231,6 @@
                     title: 'Error',
                     text: "{{ $data['message'] }}"
                 })
-                
             @endif
         })
     </script>

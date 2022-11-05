@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function index() {
-        return view('dashboard.orders', [
+        return view('dashboard.orders.orders', [
             'orders' => Order::all()
         ]);
     }

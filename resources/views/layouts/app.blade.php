@@ -41,10 +41,28 @@
                     id="kt_app_header_container">
 
                     <!--begin::Header wrapper-->
-                    <div class="d-flex align-items-stretch justify-content-end flex-lg-grow-1"
+                    <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1"
                         id="kt_app_header_wrapper">
 
-                        <!--begin::Navbar-->
+                        <!--begin::Orders widgets-->
+                        <div class="app-navbar flex-shrink-0">
+
+                            <div class="btn btn-primary my-4 me-2">
+                                Total Orders <span class="badge bg-danger ms-2">{{ Order::all()->count() }}</span>
+                            </div>
+
+                            <div class="btn btn-primary my-4 mx-2">
+                                Pending Orders <span class="badge bg-danger ms-2">{{ Order::where('status', 'pending')->get()->count() }}</span>
+                            </div>
+
+                            <div class="btn btn-primary my-4 ms-2">
+                                Completed Orders <span class="badge bg-danger ms-2">{{ Order::where('status', 'completed')->get()->count() }}</span>
+                            </div>
+
+                        </div>
+                          <!--end::Orders widgets-->
+
+                        <!--begin::User menu-->
                         <div class="app-navbar flex-shrink-0">
 
                             <!--begin::User menu-->
@@ -74,14 +92,14 @@
 
                                             <!--begin::Username-->
                                             <div class="d-flex flex-column">
-                                                <div class="fw-bold d-flex align-items-center fs-5">John Doe
-                                                    <span
-                                                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Admin</span>
+                                                <div class="fw-bold d-flex align-items-center fs-5">{{ auth()->user()->name }}
+                                                    <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">
+                                                        {{ auth()->user()->getRoleNames()->first() }}
+                                                    </span>
                                                 </div>
-                                                <a href="#"
-                                                    class="fw-semibold text-muted text-hover-primary fs-7">
-                                                    jd@phh.com
-                                                </a>
+                                                <span class="fw-semibold text-muted text-hover-primary fs-7">
+                                                    {{ auth()->user()->email }}
+                                                </span>
                                             </div>
                                             <!--end::Username-->
 
@@ -114,7 +132,7 @@
                             <!--end::User menu-->
 
                         </div>
-                        <!--end::Navbar-->
+                        <!--end::User menu-->
 
                     </div>
                     <!--end::Header wrapper-->
@@ -202,39 +220,28 @@
                                     </a>
                                 </div>
 
+                                {{-- Leads --}}
+                                <div class="menu-item">
+                                    <a class="menu-link @route('contact.index') active @endroute" href="{{ route('contact.index') }}">
+                                        <span class="menu-icon">
+                                            <span class="svg-icon svg-icon-2">
+                                                <i class="fa-solid fa-calendar-check fs-2"></i>
+                                            </span>
+                                        </span>
+                                        <span class="menu-title">Leads</span>
+                                    </a>
+                                </div>
+
                                 {{-- Products --}}
-                                <div data-kt-menu-trigger="click"
-                                    class="menu-item menu-accordion @route('product.*') show @endroute">
-                                    <span class="menu-link">
+                                <div class="menu-item">
+                                    <a class="menu-link @route('product.index') active @endroute" href="{{ route('product.index') }}">
                                         <span class="menu-icon">
                                             <span class="svg-icon svg-icon-2">
                                                 <i class="bi bi-bag-plus-fill fs-2"></i>
                                             </span>
                                         </span>
                                         <span class="menu-title">Products</span>
-                                        <span class="menu-arrow"></span>
-                                    </span>
-
-                                    <div class="menu-sub menu-sub-accordion">
-                                        <div class="menu-item">
-                                            <a class="menu-link @route('product.index') active @endroute"
-                                                href="{{ route('product.index') }}">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Listings</span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link @route(['product.create', 'product.edit']) active @endroute"
-                                                href="{{ route('product.create') }}">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Add</span>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
 
                                 {{-- Orders --}}
@@ -250,33 +257,30 @@
                                 </div>
 
                                 @if(auth()->user()->can('user-list'))
-                                <div class="menu-item">
-                                    <a class="menu-link @route('users.index') active @endroute" href="{{ route('users.index') }}">
-                                        <span class="menu-icon">
-                                            <span class="svg-icon svg-icon-2">
-                                            <i class="fa fa-users"></i>
+                                    <div class="menu-item">
+                                        <a class="menu-link @route('users.index') active @endroute" href="{{ route('users.index') }}">
+                                            <span class="menu-icon">
+                                                <span class="svg-icon svg-icon-2">
+                                                    <i class="fa fa-users fs-2"></i>
+                                                </span>
                                             </span>
-                                        </span>
-                                        <span class="menu-title">Users</span>
-                                    </a>
-                                </div>
+                                            <span class="menu-title">Users</span>
+                                        </a>
+                                    </div>
                                 @endif
                                 
                                 @if(auth()->user()->can('role-list'))
-                                <div class="menu-item">
-                                    <a class="menu-link @route('roles.index') active @endroute" href="{{ route('roles.index') }}">
-                                        <span class="menu-icon">
-                                            <span class="svg-icon svg-icon-2">
-                                                <i class="fa fa-role"></i>
+                                    <div class="menu-item">
+                                        <a class="menu-link @route('roles.index') active @endroute" href="{{ route('roles.index') }}">
+                                            <span class="menu-icon">
+                                                <span class="svg-icon svg-icon-2">
+                                                    <i class="bi bi-person-badge-fill fs-2"></i>
+                                                </span>
                                             </span>
-                                        </span>
-                                        <span class="menu-title">Roles</span>
-                                    </a>
-                                </div>
-
+                                            <span class="menu-title">Roles</span>
+                                        </a>
+                                    </div>
                                 @endif
-
-
 
                                 <!--Simple link-->
                                 {{-- <div class="menu-item">

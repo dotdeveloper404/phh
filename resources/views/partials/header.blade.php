@@ -47,7 +47,7 @@
                             <a href="{{ route('cart.list') }}" class="register position-relative">
                                 <i class="fas fa-cart-shopping"></i>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
-                                    {{ count(Cart::getContent()) }}
+                                    {{ Cart::getTotalQuantity() }}
                                 </span>
                             </a>
                         </div>

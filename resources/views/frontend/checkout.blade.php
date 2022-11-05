@@ -84,7 +84,7 @@
                                 <h4 class="mb-4">
                                     Cart
                                     <span class="price" style="color:black">
-                                        <i class="fa fa-shopping-cart"></i> <b>{{ count(Cart::getContent()) }}</b>
+                                        <i class="fa fa-shopping-cart"></i> <b>{{ Cart::getTotalQuantity() }}</b>
                                     </span>
                                 </h4>
                                 @foreach ($cartItems as $item)

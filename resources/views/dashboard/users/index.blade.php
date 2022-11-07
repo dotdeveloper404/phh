@@ -14,6 +14,7 @@
         ],
     ];
     $title = 'Users';
+    $canCreateUser = auth()->user()->can('user-create')
 @endphp
 
 @extends('layouts.app', [
@@ -21,25 +22,14 @@
     'breadcrumbs' => $breadcrumbs,
     'addButton' => true,
     'btn' => [
-        'text' => 'Add User',
-        'link' => route('users.create'),
+        'text' => $canCreateUser ? 'Add User' : 'Back',
+        'link' => $canCreateUser ? route('users.create') : url()->previous(),
     ],
 ])
 
 @section('title', $title)
 
 @section('content')
-    {{-- <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Users Management</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
-            </div>
-        </div>
-    </div> --}}
-
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible fade show">

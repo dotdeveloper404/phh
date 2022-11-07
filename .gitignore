@@ -1,7 +1,7 @@
 /node_modules
 /public/build
 /public/hot
-/public/storage
+# /public/storage
 /storage/*.key
 /vendor
 .env
@@ -14,11 +14,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-resources/views/auth/login-old.blade.php
-resources/views/auth/register-old.blade.php
-resources/views/dashboard/index-old.blade.php
-resources/views/dashboard/orders-old.blade.php
-resources/views/dashboard/product/create-old.blade.php
-resources/views/dashboard/product/index-old.blade.php
-resources/views/layouts/app-old.blade.php
-resources/views/layouts/guest-old.blade.php

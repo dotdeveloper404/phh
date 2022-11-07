@@ -43,7 +43,7 @@ Route::get('contact', [HomeController::class, 'contact'])->name('home.contact');
 Route::get('best-deals', [HomeController::class, 'bestdeals'])->name('home.bestdeals');
 Route::get('about', [HomeController::class, 'about'])->name('home.about');
 
-Route::get('product-list', [ProductController::class, 'productList'])->name('products.list');
+// Route::get('product-list', [ProductController::class, 'productList'])->name('products.list');
 Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
 Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');

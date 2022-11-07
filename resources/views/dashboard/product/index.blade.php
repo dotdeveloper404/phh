@@ -65,10 +65,10 @@
                     <tbody>
                         @if (count($products))
                             @foreach ($products as $product)
-                                <tr>
+                                <tr class="align-middle">
                                     <td>
                                         <div class="image">
-                                            <img src="{{ asset($product->image) }}" alt="" class="h-100 w-100">
+                                            <img src='{{ asset($product->image) }}' alt="" class="h-100 w-100">
                                         </div>
                                     </td>
                                     <td>{{ $product->name }}</td>
@@ -90,7 +90,7 @@
                                 </tr>
                             @endforeach
                         @else
-                            <tr>
+                            <tr class="align-middle">
                                 <td colspan="5" class="text-center">
                                     <b>
                                         No products created

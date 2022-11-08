@@ -3,6 +3,7 @@
 use App\Models\Order;
 use App\Providers\BladeServiceProvider;
 use Illuminate\Support\Facades\Facade;
+use Spatie\Permission\Models\Permission;
 
 return [
 
@@ -220,6 +221,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'Order' => Order::class,
+        'Permission' => Permission::class,
     ])->toArray(),
 
 ];

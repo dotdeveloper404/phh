@@ -221,16 +221,18 @@
                                 </div>
 
                                 {{-- Leads --}}
-                                <div class="menu-item">
-                                    <a class="menu-link @route('contact.index') active @endroute" href="{{ route('contact.index') }}">
-                                        <span class="menu-icon">
-                                            <span class="svg-icon svg-icon-2">
-                                                <i class="fa-solid fa-calendar-check fs-2"></i>
+                                @role('Admin')
+                                    <div class="menu-item">
+                                        <a class="menu-link @route('contact.index') active @endroute" href="{{ route('contact.index') }}">
+                                            <span class="menu-icon">
+                                                <span class="svg-icon svg-icon-2">
+                                                    <i class="fa-solid fa-calendar-check fs-2"></i>
+                                                </span>
                                             </span>
-                                        </span>
-                                        <span class="menu-title">Leads</span>
-                                    </a>
-                                </div>
+                                            <span class="menu-title">Leads</span>
+                                        </a>
+                                    </div>
+                                @endrole
 
                                 {{-- Products --}}
                                 <div class="menu-item">
@@ -244,6 +246,18 @@
                                     </a>
                                 </div>
 
+                                {{-- Deals --}}
+                                {{-- <div class="menu-item">
+                                    <a class="menu-link @route('deals.index') active @endroute" href="{{ route('deals.index') }}">
+                                        <span class="menu-icon">
+                                            <span class="svg-icon svg-icon-2">
+                                                <i class="bi bi-bag-plus-fill fs-2"></i>
+                                            </span>
+                                        </span>
+                                        <span class="menu-title">Deals</span>
+                                    </a>
+                                </div> --}}
+
                                 {{-- Orders --}}
                                 <div class="menu-item">
                                     <a class="menu-link @route('order.index') active @endroute" href="{{ route('order.index') }}">
@@ -256,6 +270,7 @@
                                     </a>
                                 </div>
 
+                                {{-- Users --}}
                                 @if(auth()->user()->can('user-list'))
                                     <div class="menu-item">
                                         <a class="menu-link @route('users.index') active @endroute" href="{{ route('users.index') }}">
@@ -269,7 +284,8 @@
                                     </div>
                                 @endif
                                 
-                                @if(auth()->user()->can('role-list'))
+                                {{-- Roles --}}
+                                {{-- @if(auth()->user()->can('role-list'))
                                     <div class="menu-item">
                                         <a class="menu-link @route('roles.index') active @endroute" href="{{ route('roles.index') }}">
                                             <span class="menu-icon">
@@ -280,7 +296,7 @@
                                             <span class="menu-title">Roles</span>
                                         </a>
                                     </div>
-                                @endif
+                                @endif --}}
 
                                 <!--Simple link-->
                                 {{-- <div class="menu-item">

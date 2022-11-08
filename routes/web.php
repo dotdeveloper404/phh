@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CartController, HomeController, RoleController, OrderController, ContactController, ProductController, CheckoutController, UserController};
+use App\Http\Controllers\{CartController, HomeController, RoleController, OrderController, ContactController, ProductController, CheckoutController, DealController, UserController};
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +14,13 @@ use App\Http\Controllers\{CartController, HomeController, RoleController, OrderC
 |
 */
 
-Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['auth', 'verified', 'role:Admin|Restaurant'])->prefix('dashboard')->group(function () {
     Route::get('', function () {
         return view('dashboard.index');
     })->name('dashboard');
 
     Route::resource('product', ProductController::class);
+    Route::resource('deals', DealController::class);
     Route::resource('contact', ContactController::class, [
         'only' => ['index', 'store', 'destroy']
     ]);

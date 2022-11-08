@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2022 at 02:22 AM
+-- Generation Time: Nov 08, 2022 at 01:44 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -42,7 +42,28 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `name`, `email`, `phone`, `message`, `created_at`, `updated_at`) VALUES
-(5, 'Bo Prince', 'nydyfuryx@mailinator.com', '+1 (727) 799-6428', 'Et enim dolore tempo', '2022-10-27 19:17:38', '2022-10-27 19:17:38');
+(6, 'Rogan Tucker', 'pokojoto@mailinator.com', '+1 (878) 519-3035', 'Totam animi repelle', '2022-11-04 18:35:15', '2022-11-04 18:35:15'),
+(7, 'Ahmed Spencer', 'voruq@mailinator.com', '+1 (677) 508-3923', 'Laborum Ipsum amet', '2022-11-04 18:35:28', '2022-11-04 18:35:28'),
+(8, 'Qwert', 'abc@xyz.com', '123123123132', 'asdauoishcuoas casdhuashbduas', '2022-11-07 16:13:02', '2022-11-07 16:13:02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deals`
+--
+
+CREATE TABLE `deals` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `date` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -84,7 +105,44 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2022_10_25_183348_create_products_table', 1),
 (6, '2022_10_27_173950_create_contact_table', 1),
 (14, '2022_10_28_180609_create_orders_table', 2),
-(15, '2022_10_28_184324_create_order_items_table', 2);
+(17, '2022_10_28_184324_create_order_items_table', 3),
+(18, '2022_11_02_155803_create_permission_tables', 4),
+(19, '2022_11_04_191108_add_status_column_in_orders_table', 5),
+(20, '2022_11_07_212809_create_deals_table', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `model_has_permissions`
+--
+
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `model_has_roles`
+--
+
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', 8),
+(2, 'App\\Models\\User', 9),
+(2, 'App\\Models\\User', 12),
+(3, 'App\\Models\\User', 14);
 
 -- --------------------------------------------------------
 
@@ -98,20 +156,18 @@ CREATE TABLE `orders` (
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `total`, `code`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 3142, 'dc5264', 1, '2022-10-28 18:50:01', '2022-10-28 18:50:01'),
-(2, 3792, 'd694b5', 1, '2022-10-28 18:50:54', '2022-10-28 18:50:54'),
-(3, 10092, '8d1edd', 1, '2022-10-28 19:01:59', '2022-10-28 19:01:59'),
-(4, 450, 'b57cb1', 1, '2022-10-28 19:06:38', '2022-10-28 19:06:38'),
-(5, 350, 'c5b3ab', 1, '2022-10-28 19:08:07', '2022-10-28 19:08:07'),
-(6, 750, '6b4738', 1, '2022-10-28 19:08:50', '2022-10-28 19:08:50');
+INSERT INTO `orders` (`id`, `total`, `code`, `user_id`, `created_at`, `updated_at`, `status`) VALUES
+(11, 950, '0fcb43', 8, '2022-11-04 13:20:41', '2022-11-04 13:20:41', 'pending'),
+(12, 3642, '977c66', 8, '2022-11-04 13:24:01', '2022-11-04 13:24:01', 'pending'),
+(13, 6250, '097204', 8, '2022-11-04 14:00:32', '2022-11-04 14:00:32', 'pending');
 
 -- --------------------------------------------------------
 
@@ -122,7 +178,9 @@ INSERT INTO `orders` (`id`, `total`, `code`, `user_id`, `created_at`, `updated_a
 CREATE TABLE `order_items` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `order_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `quantity` int(11) NOT NULL,
   `subtotal` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -133,18 +191,12 @@ CREATE TABLE `order_items` (
 -- Dumping data for table `order_items`
 --
 
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `subtotal`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 2, 700, '2022-10-28 18:50:01', '2022-10-28 18:50:01'),
-(2, 1, 15, 3, 2442, '2022-10-28 18:50:01', '2022-10-28 18:50:01'),
-(3, 2, 2, 2, 700, '2022-10-28 18:50:54', '2022-10-28 18:50:54'),
-(4, 2, 15, 3, 2442, '2022-10-28 18:50:54', '2022-10-28 18:50:54'),
-(5, 2, 5, 1, 650, '2022-10-28 18:50:54', '2022-10-28 18:50:54'),
-(6, 3, 15, 3, 2442, '2022-10-28 19:01:59', '2022-10-28 19:01:59'),
-(7, 3, 5, 1, 650, '2022-10-28 19:01:59', '2022-10-28 19:01:59'),
-(8, 3, 2, 20, 7000, '2022-10-28 19:01:59', '2022-10-28 19:01:59'),
-(9, 4, 3, 1, 450, '2022-10-28 19:06:38', '2022-10-28 19:06:38'),
-(10, 5, 2, 1, 350, '2022-10-28 19:08:07', '2022-10-28 19:08:07'),
-(11, 6, 6, 1, 750, '2022-10-28 19:08:50', '2022-10-28 19:08:50');
+INSERT INTO `order_items` (`id`, `order_id`, `name`, `price`, `image`, `quantity`, `subtotal`, `created_at`, `updated_at`) VALUES
+(8, 11, 'Deal Name 06', '950', 'assets/images/deals-img.png', 1, 950, '2022-11-04 13:20:41', '2022-11-04 13:20:41'),
+(9, 12, 'Deal Name 06', '950', 'assets/images/deals-img.png', 1, 950, '2022-11-04 13:24:01', '2022-11-04 13:24:01'),
+(10, 12, 'Carissa Gutierrez', '821', 'uploads/product/c6025476ca5ac3ec67e50527081b0b96.png', 2, 1642, '2022-11-04 13:24:01', '2022-11-04 13:24:01'),
+(11, 12, 'Deal Name 08', '1050', 'assets/images/deals-img.png', 1, 1050, '2022-11-04 13:24:01', '2022-11-04 13:24:01'),
+(12, 13, 'Deal Name 09', '1250', 'assets/images/deals-img.png', 5, 6250, '2022-11-04 14:00:32', '2022-11-04 14:00:32');
 
 -- --------------------------------------------------------
 
@@ -157,6 +209,39 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'role-list', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(2, 'role-create', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(3, 'role-edit', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(4, 'role-delete', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(5, 'product-list', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(6, 'product-create', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(7, 'product-edit', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(8, 'product-delete', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(9, 'user-list', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(10, 'user-create', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(11, 'user-edit', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(12, 'user-delete', 'web', '2022-11-04 11:16:35', '2022-11-04 11:16:35'),
+(13, 'customer', 'web', '2022-11-07 15:48:21', '2022-11-07 15:48:21');
 
 -- --------------------------------------------------------
 
@@ -198,17 +283,71 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `description`, `image`, `created_at`, `updated_at`) VALUES
-(2, 'Deal Name 02', '350', 'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod.', '/assets/images/deals-img.png', '2022-10-27 14:05:16', '2022-10-27 14:05:16'),
-(3, 'Deal Name 03', '450', 'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod.', '/assets/images/deals-img.png', '2022-10-27 14:05:16', '2022-10-27 14:05:16'),
-(5, 'Deal Name 02', '650', 'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod.', '/assets/images/deals-img.png', '2022-10-27 14:05:16', '2022-10-27 14:05:16'),
-(6, 'Deal Name 05', '750', 'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod.', '/assets/images/deals-img.png', '2022-10-27 14:05:16', '2022-10-27 14:05:16'),
-(7, 'Deal Name 06', '950', 'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod.', '/assets/images/deals-img.png', '2022-10-27 14:05:16', '2022-10-27 14:05:16'),
-(8, 'Deal Name 07', '850', 'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod.', '/assets/images/deals-img.png', '2022-10-27 14:05:16', '2022-10-27 14:05:16'),
-(9, 'Deal Name 08', '1050', 'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod.', '/assets/images/deals-img.png', '2022-10-27 14:05:16', '2022-10-27 14:05:16'),
-(10, 'Deal Name 09', '1250', 'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod.', '/assets/images/deals-img.png', '2022-10-27 14:05:16', '2022-10-27 14:05:16'),
-(11, 'Deal Name 10', '1350', 'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod.', '/assets/images/deals-img.png', '2022-10-27 14:05:16', '2022-10-27 14:05:16'),
-(15, 'Erica Gamble', '814', 'Ab possimus quo nos', 'uploads/product/4a69dceb25ddd53fc7471a8bd399f9ee.png', '2022-10-27 16:55:25', '2022-10-28 15:08:58'),
-(18, 'Carissa Gutierrez', '821', 'Beatae beatae vero e', 'uploads/product/c6025476ca5ac3ec67e50527081b0b96.png', '2022-10-27 18:50:35', '2022-10-27 18:50:35');
+(7, 'Leslie Livingston', '412', 'Maiores esse accusan', 'storage/products/cnH9eqpjPbSV74uRT735PrYz5wPGcujc4jzP0oOi.png', '2022-10-27 14:05:16', '2022-11-07 13:50:44'),
+(8, 'Deal Name 07', '850', 'Lorem ipsum dolor sit', 'storage/products/R1bQwXAPpjLCqY9IKobOhudG1lAvYlKzXXylpXkw.jpg', '2022-10-27 14:05:16', '2022-11-07 13:52:41'),
+(9, 'Deal Name 08', '1050', 'Lorem ipsum dolor sit amet,con', 'storage/products/lXIKEeXgeY2ctJtX3UzCeQrQnjYjq8m7nEhJy7Xi.png', '2022-10-27 14:05:16', '2022-11-07 13:52:54'),
+(10, 'Deal Name 09', '1250', 'Lorem ipsum dolor sit amet,cons', 'storage/products/EjfUDq6wGoKZTc5ALw0C2v1gEueUI7xmKhOhcWGd.png', '2022-10-27 14:05:16', '2022-11-07 13:53:14'),
+(15, 'Erica Gamble', '814', 'Ab possimus quo nos', 'storage/products/dqxBp4fKidDSRRtlZhhDarFqcaKti0hIY0lZdIlm.jpg', '2022-10-27 16:55:25', '2022-11-07 13:53:47'),
+(18, 'Carissa Gutierrez', '821', 'Beatae beatae vero e', 'storage/products/qK9dexf0PVUil1K5nrlAJF5SLR8x1LhA3VRauzPR.png', '2022-10-27 18:50:35', '2022-11-07 13:53:57'),
+(21, 'Sage Dudley', '239', 'Quis quia aut velit', 'storage/products/YrGCRKRlotBkAVisSZPuaE3QZQIbpQ55cpjppmVi.png', '2022-11-07 13:19:42', '2022-11-07 13:50:19'),
+(22, 'Martin Hebert', '575', 'Fugiat quam vero au', 'storage/products/4FNKIUtGALohpDg64L32kthFvDR1qMl91lWp7dvF.png', '2022-11-07 13:54:49', '2022-11-07 13:54:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'web', '2022-11-04 12:18:03', '2022-11-04 12:18:03'),
+(2, 'Restaurant', 'web', '2022-11-04 12:31:34', '2022-11-04 12:31:34'),
+(3, 'Customer', 'web', '2022-11-07 15:48:32', '2022-11-07 15:48:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_has_permissions`
+--
+
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(5, 2),
+(6, 1),
+(6, 2),
+(7, 1),
+(7, 2),
+(8, 1),
+(8, 2),
+(9, 1),
+(10, 1),
+(11, 1),
+(12, 1),
+(13, 3);
 
 -- --------------------------------------------------------
 
@@ -232,8 +371,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@phh.com', NULL, '$2y$10$8OL3N19AOTsg3dKSNvfkM.DKGpaL3myKi2b6FgDSuywKfE8OQaHSW', '3VHhLcKFgvtVYyJWAFPelYeaWNQ4iKO5iXgp0Jo7qWaJONP4wMyzApcwVL5J', '2022-10-27 14:16:47', '2022-10-27 14:16:47'),
-(2, 'Jason Rasmussen', 'cx@phh.com', NULL, '$2y$10$IehlcsSuDTRH2Pu9LsXYH.0afJT0SZzZ/mt0lnvV2Zsg09S0Wr6RS', NULL, '2022-10-28 16:55:25', '2022-10-28 16:55:25');
+(8, 'PHH Admin', 'admin@phh.com', NULL, '$2y$10$E3VcFyQTaZGQW0wxfrwpvu4nQ.M883xLpXTkjH8GnjMGFb0FQ6u6m', 'tTCYXJcmJxKirKbXvYuP6bEH8ap0Qwb6ewam3wwUlFuHmj8JDmPMlbtHHTFy', '2022-11-04 12:18:03', '2022-11-04 12:36:09'),
+(9, 'Sharon Frank', 'taqacu@mailinator.com', NULL, '$2y$10$NDMFoPm7xA5osdmeImeM9O3V3g1/VD3PEtpAVOFHkmCN8Ss9lO0Rm', 'D3bmakUK1JX8k6hSY4Tv1bOkYByq6yZz0m8uS3WeYwEC8b9YUc4b4dNw7kJ1', '2022-11-04 12:32:02', '2022-11-04 18:21:52'),
+(12, 'Lesley Fry', 'divenyh@mailinator.com', NULL, '$2y$10$BECg3qDKTWy7a5HZ1Eu9z.j.BSWAE66/lEq.UrrWnoAc6ld2jKp9G', NULL, '2022-11-07 12:11:39', '2022-11-07 12:11:39'),
+(14, 'Ralph Bender', 'suqujoxyb@mailinator.com', NULL, '$2y$10$cyBsow0oKz.SkWi02c5oeuyXazR09gcZc.WXAYW2VQxTQIAEKtoVC', NULL, '2022-11-07 15:49:47', '2022-11-07 15:49:47');
 
 --
 -- Indexes for dumped tables
@@ -243,6 +384,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `deals`
+--
+ALTER TABLE `deals`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -259,6 +406,20 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -270,14 +431,20 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `order_items_order_id_foreign` (`order_id`),
-  ADD KEY `order_items_product_id_foreign` (`product_id`);
+  ADD KEY `order_items_order_id_foreign` (`order_id`);
 
 --
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -294,6 +461,20 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indexes for table `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -308,7 +489,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `deals`
+--
+ALTER TABLE `deals`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -320,19 +507,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -344,17 +537,35 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `orders`
@@ -366,8 +577,14 @@ ALTER TABLE `orders`
 -- Constraints for table `order_items`
 --
 ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  ADD CONSTRAINT `order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
+
+--
+-- Constraints for table `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Models\Deal;
 
 class HomeController extends Controller
 {
@@ -11,8 +10,10 @@ class HomeController extends Controller
     public function index()
     {
 
-        $products = Product::all();
-        return view('frontend.index', compact('products'));
+        // $products = Product::all();
+        // return view('frontend.index', compact('products'));
+        $deals = Deal::all();
+        return view('frontend.index', compact('deals'));
     }
 
     public function about()
@@ -37,7 +38,7 @@ class HomeController extends Controller
 
     public function bestdeals()
     {
-        $products = Product::all();
-        return view('frontend.best-deals', compact('products'));
+        $deals = Deal::all();
+        return view('frontend.best-deals', compact('deals'));
     }
 }

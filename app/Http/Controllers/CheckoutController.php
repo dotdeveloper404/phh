@@ -7,7 +7,7 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Models\{Order, OrderItem, Product};
+use App\Models\{Deal, Order, OrderItem, Product};
 
 class CheckoutController extends Controller
 {
@@ -18,15 +18,17 @@ class CheckoutController extends Controller
         if ($cart->isEmpty()) {
             return redirect()->route('cart.list')->with('error', 'Add products to your cart first.');
         }
-        $products = Product::all();
+        // $products = Product::all();
+        $deals = Deal::all();
         $cartItems = $cart->all();
-        return view('frontend.checkout', compact('cartItems', 'products'));
+        return view('frontend.checkout', compact('cartItems', 'deals'));
     }
 
     public function doCheckout(Request $request)
     {
         try {
             $cart = Cart::getContent()->all();
+            // dd($cart);
             $user = $request->user();
 
             $order = Order::create([
@@ -38,9 +40,7 @@ class CheckoutController extends Controller
             foreach ($cart as $item) {
                 OrderItem::create([
                     'order_id' => $order->id,
-                    'name' => $item->name,
-                    'price' => $item->price,
-                    'image' => $item->attributes->image,
+                    'deal_id' => $item->id,
                     'quantity' => $item->quantity,
                     'subtotal' => $item->getPriceSum()
                 ]);
@@ -56,7 +56,7 @@ class CheckoutController extends Controller
             })->all();
             $emails = [$user->email, ...$adminEmails];
 
-            $this->sendEmailAfterCheckout($emails, $order);
+            // $this->sendEmailAfterCheckout($emails, $order);
 
             return redirect()->route('home.index')->with('order_placed', [
                 'success' => true,

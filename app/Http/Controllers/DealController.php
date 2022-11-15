@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Deal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class DealController extends Controller
 {
@@ -12,10 +13,13 @@ class DealController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->user()->hasRole('Admin')) $deals = Deal::with('restaurant')->orderByDesc('created_at')->get();
+        else $deals = Deal::where('restaurant_id', $request->user()->id)->orderByDesc('created_at')->get();
+
         return view('dashboard.deals.index', [
-            'deals' => Deal::orderByDesc('created_at')->get() ?? null
+            'deals' => $deals
         ]);
     }
 
@@ -40,7 +44,7 @@ class DealController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:30'],
             'price' => ['required', 'numeric', 'min:1'],
-            'image' => ['mimes:jpg,jpeg,png'],
+            'image' => ['required', 'mimes:jpg,jpeg,png'],
             'description' => ['required', 'string'],
             'date' => ['required', "date", 'after_or_equal:today'],
             'start_time' => ['required', 'date_format:H:i'],
@@ -51,11 +55,16 @@ class DealController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image')->store('deals');
-            $data = array_merge($data, ['image' => "storage/$file"]);
+            $data = array_merge($data, ['image' => $file]);
         }
 
+        $data = array_merge($data, ['restaurant_id' => $request->user()->id]);
+
         $deal = Deal::create($data);
-        return redirect()->route('deals.index');
+        return redirect()->route('deals.index')->with('alert', [
+            'type' => 'success',
+            'msg' => 'Deal created'
+        ]);;
     }
 
     /**
@@ -77,7 +86,9 @@ class DealController extends Controller
      */
     public function edit(Deal $deal)
     {
-        //
+        return view('dashboard.deals.create', [
+            'deal' => $deal
+        ]);
     }
 
     /**
@@ -89,7 +100,32 @@ class DealController extends Controller
      */
     public function update(Request $request, Deal $deal)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:30'],
+            'price' => ['required', 'numeric', 'min:1'],
+            'image' => ['mimes:jpg,jpeg,png'],
+            'description' => ['required', 'string'],
+            'date' => ['required', "date", 'after_or_equal:today'],
+            'start_time' => ['required', 'date_format:H:i'],
+            'end_time' => ['required', 'date_format:H:i', 'after:start_time'],
+        ], [
+            'end_time.after' => "The :attribute must be after :date."
+        ]);
+
+        if ($request->hasFile('image')) {
+            if (file_exists($path = storage_path('app/public/'))) {
+                File::delete($path);
+            }
+
+            $file = $request->file('image')->store('deals');
+            $data = array_merge($data, ['image' => $file]);
+        }
+
+        $deal->update($data);
+        return redirect()->route('deals.index')->with('alert', [
+            'type' => 'success',
+            'msg' => 'Deal updated'
+        ]);;
     }
 
     /**
@@ -100,6 +136,10 @@ class DealController extends Controller
      */
     public function destroy(Deal $deal)
     {
-        //
+        $deal->delete();
+        return redirect()->route('deals.index')->with('alert', [
+            'type' => 'success',
+            'msg' => 'Deal deleted'
+        ]);
     }
 }

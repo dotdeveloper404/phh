@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{CartController, HomeController, RoleController, OrderController, ContactController, ProductController, CheckoutController, DealController, UserController};
+use App\Models\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ Route::middleware(['auth', 'verified', 'role:Admin|Restaurant'])->prefix('dashbo
         return view('dashboard.index');
     })->name('dashboard');
 
-    Route::resource('product', ProductController::class);
+    // Route::resource('product', ProductController::class);
     Route::resource('deals', DealController::class);
     Route::resource('contact', ContactController::class, [
         'only' => ['index', 'store', 'destroy']
@@ -52,3 +53,8 @@ Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove'
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
 require __DIR__ . '/auth.php';
+
+
+// Route::get('order-test/{order}', function(Order $order) {
+//     dd($order->restaurant());
+// });

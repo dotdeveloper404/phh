@@ -15,10 +15,6 @@
         ],
     ];
     $isCreatePage = request()->routeIs('deals.create');
-    
-    // if(old('description')) {
-    //     dd(old('description'));
-    // }
 @endphp
 
 @extends('layouts.app', [
@@ -159,11 +155,6 @@
                     toolbar: ['bold', 'italic', 'bulletedList', 'numberedList'],
                 })
                 .catch(err => { console.log(err) })
-
-            // $('form').on('submit', function(event) {
-            //     event.preventDefault()
-            //     this.submit()
-            // })
         })
     </script>
 @endpush

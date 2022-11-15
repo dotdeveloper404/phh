@@ -170,7 +170,7 @@
         </div>
     </section> --}}
 
-    <x-deals-section :$products></x-deals-section>
+    <x-deals-section :$deals></x-deals-section>
 
     <section class="testimonials-section">
         <div class="container-fluid">
@@ -231,6 +231,7 @@
                     title: 'Error',
                     text: "{{ $data['message'] }}"
                 })
+                console.log("{{ $data['dev_msg'] }}");
             @endif
         })
     </script>

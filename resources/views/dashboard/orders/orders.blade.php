@@ -26,7 +26,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped datatable">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -51,7 +51,6 @@
                                 <td>
                                     <button class="btn btn-primary"
                                         onclick="loadDetails({{ $order->items }})">Details</button>
-                                    {{-- data-bs-toggle="modal" data-bs-target="#order-details-modal" --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -91,18 +90,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- <tr>
-                                    <td></td>
-                                    <td>
-                                        <div style="height: 50px; width: 50px;">
-                                            <img src="" alt="Product Image" class="img-fluid">
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr> --}}
                             </tbody>
                         </table>
                     </div>
@@ -118,17 +105,16 @@
 @push('scripts')
     <script>
         const loadDetails = data => {
-            console.log(data)
             let html = ''
             data.forEach((val, i) => {
                 html += `
                         <tr class="align-middle">
                             <td>${++i}</td>
                             <td>
-                                <img src="/${val.image}" alt="Product Image" class="img-fluid" style="height: 50px; width: 50px;">
+                                <img src="/uploads/${val.deal.image}" alt="Product Image" class="img-fluid" style="height: 50px; width: 50px;">
                             </td>
-                            <td>${val.name}</td>
-                            <td>${val.price}</td>
+                            <td>${val.deal.name}</td>
+                            <td>${val.deal.price}</td>
                             <td>${val.quantity}</td>
                             <td>${val.subtotal}</td>
                         </tr>

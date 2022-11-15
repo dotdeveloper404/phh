@@ -1,11 +1,12 @@
 @php
+    $title = 'Deals';
     $breadcrumbs = [
         [
             'name' => 'Dashboard',
             'link' => route('dashboard'),
         ],
         [
-            'name' => 'Products',
+            'name' => $title,
             'link' => false,
         ],
         [
@@ -13,17 +14,17 @@
             'link' => false,
         ],
     ];
-    $title = 'Products';
+    
 @endphp
 
 @extends('layouts.app', [
-    'title' => $title, 
+    'title' => $title,
     'breadcrumbs' => $breadcrumbs,
     'addButton' => true,
     'btn' => [
-        'text' => 'Add Product',
-        'link' => route('product.create')
-    ]
+        'text' => 'Add Deal',
+        'link' => route('deals.create'),
+    ],
 ])
 
 @section('title', $title)
@@ -51,11 +52,20 @@
 @section('content')
     <div class="container-fluid">
         <div class="p-5">
+            @if ($alert = Session::get('alert'))
+                <div class="alert alert-{{ $alert['type'] }} alert-dismissible fade show" role="alert">
+                    <strong>{{ $alert['msg'] }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Image</th>
+                            @role('Admin')
+                                <th>Restaurant</th>
+                            @endrole
                             <th>Name</th>
                             <th>Price</th>
                             <th>Description</th>
@@ -63,26 +73,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($products))
-                            @foreach ($products as $product)
+                        @if (count($deals))
+                            @foreach ($deals as $d)
                                 <tr class="align-middle">
                                     <td>
                                         <div class="image">
-                                            <img src='{{ asset($product->image) }}' alt="" class="h-100 w-100">
+                                            <img src='{{ asset("uploads/$d->image") }}' alt="" class="h-100 w-100">
                                         </div>
                                     </td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>{{ $product->description }}</td>
+                                    @role('Admin')
+                                        <td>{{ $d->restaurant->name }}</td>
+                                    @endrole
+                                    <td>{{ $d->name }}</td>
+                                    <td>{{ $d->price }}</td>
+                                    <td>{!! $d->description !!}</td>
                                     <td>
                                         <div class="d-flex">
                                             <a class="delete bg-danger d-flex align-items-center justify-content-center"
-                                                href="javascript:void(0)"
-                                                data-url="{{ route('product.destroy', $product->id) }}">
+                                                href="javascript:void(0)">
                                                 <i class="fas fa-trash-alt text-white"></i>
+                                                <form action="{{ route('deals.destroy', $d->id) }}" method="post">
+                                                    @csrf @method('delete')
+                                                </form>
                                             </a>
                                             <a class="edit ms-2 bg-primary d-flex align-items-center justify-content-center"
-                                                href="{{ route('product.edit', $product->id) }}">
+                                                href="{{ route('deals.edit', $d->id) }}">
                                                 <i class="fas fa-edit text-white"></i>
                                             </a>
                                         </div>
@@ -91,9 +106,9 @@
                             @endforeach
                         @else
                             <tr class="align-middle">
-                                <td colspan="5" class="text-center">
+                                <td colspan="@role('Admin') 6 @else 5 @endrole" class="text-center">
                                     <b>
-                                        No products created
+                                        No deals created
                                     </b>
                                 </td>
                             </tr>
@@ -114,28 +129,7 @@
                 text: 'Are you sure to proceed?',
                 showCancelButton: true,
             }).then((result) => {
-                if (result.isConfirmed) {
-                    axios.delete($(this).data('url'))
-                        .then(response => response.data)
-                        .then(data => {
-                            if (data.success) {
-                                window.location.reload()
-                            } else {
-                                swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'Something went wrong!',
-                                })
-                            }
-                        })
-                        .catch(err => {
-                            swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Something went wrong!',
-                            })
-                        })
-                }
+                if (result.isConfirmed) this.querySelector('form').submit()
             })
 
 

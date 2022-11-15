@@ -14,11 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('orders');
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->integer('total');
             $table->string('code');
-            $table->foreignIdFor(User::class)->constrained();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

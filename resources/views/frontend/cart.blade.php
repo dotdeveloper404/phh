@@ -41,7 +41,7 @@
                                 @forelse ($cartItems as $item)
                                     <tr class="align-middle">
                                         <td>
-                                            <img src="{{ $item->attributes->image }}" alt="Thumbnail" style="width: 70px;height: 70px;">
+                                            <img src="{{ asset("uploads/{$item->attributes->image}") }}" alt="Thumbnail" style="width: 70px;height: 70px;">
                                         </td>
                                         <td>
                                             {{ $item->name }}
@@ -89,7 +89,7 @@
         </div>
     </section>
 
-    <x-deals-section :$products></x-deals-section>
+    <x-deals-section :$deals></x-deals-section>
 
 @endsection
 

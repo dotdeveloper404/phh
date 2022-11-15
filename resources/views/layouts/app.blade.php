@@ -1,3 +1,5 @@
+@inject('order', 'App\Services\OrderWidgetService')
+
 <!DOCTYPE html>
 
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -17,7 +19,25 @@
     <link href="{{ asset('dashboard-assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 
+    <link rel="stylesheet" type="text/css" src="{{ asset('dashboard-assets/plugins/DataTables/datatables.min.css') }}">
+
+
     @vite(['resources/js/app.js'])
+
+    <style>
+        .dataTables_filter {
+            text-align: end
+        }
+
+        .dataTables_filter label {
+            text-align: start
+        }
+
+        #DataTables_Table_0_paginate
+        .pagination {
+            justify-content: end
+        }
+    </style>
 
     @stack('styles')
 </head>
@@ -46,21 +66,22 @@
 
                         <!--begin::Orders widgets-->
                         <div class="app-navbar flex-shrink-0">
-
                             <div class="btn btn-primary my-4 me-2">
-                                Total Orders <span class="badge bg-danger ms-2">{{ Order::all()->count() }}</span>
+                                Total Orders <span class="badge bg-danger ms-2">{{ $order->totalOrders() }}</span>
                             </div>
 
                             <div class="btn btn-primary my-4 mx-2">
-                                Pending Orders <span class="badge bg-danger ms-2">{{ Order::where('status', 'pending')->get()->count() }}</span>
+                                Pending Orders <span
+                                    class="badge bg-danger ms-2">{{ $order->totalPendingOrders() }}</span>
                             </div>
 
                             <div class="btn btn-primary my-4 ms-2">
-                                Completed Orders <span class="badge bg-danger ms-2">{{ Order::where('status', 'completed')->get()->count() }}</span>
+                                Completed Orders <span
+                                    class="badge bg-danger ms-2">{{ $order->totalCompletedOrders() }}</span>
                             </div>
 
                         </div>
-                          <!--end::Orders widgets-->
+                        <!--end::Orders widgets-->
 
                         <!--begin::User menu-->
                         <div class="app-navbar flex-shrink-0">
@@ -92,7 +113,8 @@
 
                                             <!--begin::Username-->
                                             <div class="d-flex flex-column">
-                                                <div class="fw-bold d-flex align-items-center fs-5">{{ auth()->user()->name }}
+                                                <div class="fw-bold d-flex align-items-center fs-5">
+                                                    {{ auth()->user()->name }}
                                                     <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">
                                                         {{ auth()->user()->getRoleNames()->first() }}
                                                     </span>
@@ -220,10 +242,38 @@
                                     </a>
                                 </div>
 
-                                {{-- Leads --}}
                                 @role('Admin')
+
+                                    {{-- Users --}}
                                     <div class="menu-item">
-                                        <a class="menu-link @route('contact.index') active @endroute" href="{{ route('contact.index') }}">
+                                        <a class="menu-link @route('users.index') active @endroute"
+                                            href="{{ route('users.index') }}">
+                                            <span class="menu-icon">
+                                                <span class="svg-icon svg-icon-2">
+                                                    <i class="fa fa-users fs-2"></i>
+                                                </span>
+                                            </span>
+                                            <span class="menu-title">Users</span>
+                                        </a>
+                                    </div>
+
+                                    {{-- Roles --}}
+                                    <div class="menu-item">
+                                        <a class="menu-link @route('roles.index') active @endroute"
+                                            href="{{ route('roles.index') }}">
+                                            <span class="menu-icon">
+                                                <span class="svg-icon svg-icon-2">
+                                                    <i class="bi bi-person-badge-fill fs-2"></i>
+                                                </span>
+                                            </span>
+                                            <span class="menu-title">Roles</span>
+                                        </a>
+                                    </div>
+
+                                    {{-- Leads --}}
+                                    <div class="menu-item">
+                                        <a class="menu-link @route('contact.index') active @endroute"
+                                            href="{{ route('contact.index') }}">
                                             <span class="menu-icon">
                                                 <span class="svg-icon svg-icon-2">
                                                     <i class="fa-solid fa-calendar-check fs-2"></i>
@@ -232,23 +282,13 @@
                                             <span class="menu-title">Leads</span>
                                         </a>
                                     </div>
+
                                 @endrole
 
-                                {{-- Products --}}
-                                <div class="menu-item">
-                                    <a class="menu-link @route('product.index') active @endroute" href="{{ route('product.index') }}">
-                                        <span class="menu-icon">
-                                            <span class="svg-icon svg-icon-2">
-                                                <i class="bi bi-bag-plus-fill fs-2"></i>
-                                            </span>
-                                        </span>
-                                        <span class="menu-title">Products</span>
-                                    </a>
-                                </div>
-
                                 {{-- Deals --}}
-                                {{-- <div class="menu-item">
-                                    <a class="menu-link @route('deals.index') active @endroute" href="{{ route('deals.index') }}">
+                                <div class="menu-item">
+                                    <a class="menu-link @route('deals.index') active @endroute"
+                                        href="{{ route('deals.index') }}">
                                         <span class="menu-icon">
                                             <span class="svg-icon svg-icon-2">
                                                 <i class="bi bi-bag-plus-fill fs-2"></i>
@@ -256,11 +296,12 @@
                                         </span>
                                         <span class="menu-title">Deals</span>
                                     </a>
-                                </div> --}}
+                                </div>
 
                                 {{-- Orders --}}
                                 <div class="menu-item">
-                                    <a class="menu-link @route('order.index') active @endroute" href="{{ route('order.index') }}">
+                                    <a class="menu-link @route('order.index') active @endroute"
+                                        href="{{ route('order.index') }}">
                                         <span class="menu-icon">
                                             <span class="svg-icon svg-icon-2">
                                                 <i class="bi bi-cart-check-fill fs-2"></i>
@@ -270,33 +311,18 @@
                                     </a>
                                 </div>
 
-                                {{-- Users --}}
-                                @if(auth()->user()->can('user-list'))
-                                    <div class="menu-item">
-                                        <a class="menu-link @route('users.index') active @endroute" href="{{ route('users.index') }}">
-                                            <span class="menu-icon">
-                                                <span class="svg-icon svg-icon-2">
-                                                    <i class="fa fa-users fs-2"></i>
-                                                </span>
+
+                                {{-- Products --}}
+                                {{-- <div class="menu-item">
+                                    <a class="menu-link @route('product.index') active @endroute" href="{{ route('product.index') }}">
+                                        <span class="menu-icon">
+                                            <span class="svg-icon svg-icon-2">
+                                                <i class="bi bi-bag-plus-fill fs-2"></i>
                                             </span>
-                                            <span class="menu-title">Users</span>
-                                        </a>
-                                    </div>
-                                @endif
-                                
-                                {{-- Roles --}}
-                                {{-- @if(auth()->user()->can('role-list'))
-                                    <div class="menu-item">
-                                        <a class="menu-link @route('roles.index') active @endroute" href="{{ route('roles.index') }}">
-                                            <span class="menu-icon">
-                                                <span class="svg-icon svg-icon-2">
-                                                    <i class="bi bi-person-badge-fill fs-2"></i>
-                                                </span>
-                                            </span>
-                                            <span class="menu-title">Roles</span>
-                                        </a>
-                                    </div>
-                                @endif --}}
+                                        </span>
+                                        <span class="menu-title">Products</span>
+                                    </a>
+                                </div> --}}
 
                                 <!--Simple link-->
                                 {{-- <div class="menu-item">
@@ -480,5 +506,12 @@
     <script src="{{ asset('dashboard-assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
 
+    <script src="{{ asset('dashboard-assets/plugins/DataTables/datatables.min.js') }}"></script>
+
     @stack('scripts')
+    <script>
+        $(function() {
+            $('.datatable').DataTable();
+        })
+    </script>
 </body>

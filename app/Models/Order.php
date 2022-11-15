@@ -10,7 +10,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = ['total', 'user_id', 'code'];
-    // protected $with = ['items', 'user'];
+    protected $with = ['items', 'user'];
 
     public function items()
     {
@@ -19,5 +19,9 @@ class Order extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function restaurant() {
+        return $this->items->first()->deal->restaurant;
     }
 }

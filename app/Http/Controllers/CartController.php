@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use Darryldecode\Cart\Cart;
+use App\Models\Deal;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -12,9 +11,10 @@ class CartController extends Controller
 
     public function cartList()
     {
-        $products = Product::all();
+        // $products = Product::all();
+        $deals = Deal::all();
         $cartItems = \Cart::getContent();
-        return view('frontend.cart', compact('cartItems','products'));
+        return view('frontend.cart', compact('cartItems','deals'));
 
     }
 

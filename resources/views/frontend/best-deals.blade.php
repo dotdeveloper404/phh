@@ -13,7 +13,7 @@
         </div>
     </section>
 
-    <x-deals-section :$products></x-deals-section>
+    <x-deals-section :$deals></x-deals-section>
 
     <section class="beer-section">
         <div class="container">

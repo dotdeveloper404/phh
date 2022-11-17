@@ -26,7 +26,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="table-responsive">
-            <table class="table table-striped datatable">
+            <table class="table table-striped @if(count($orders)) datatable @endif">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -56,7 +56,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="6" class="text-center">
+                            <td colspan="7" class="text-center">
                                 <b>
                                     No orders placed
                                 </b>

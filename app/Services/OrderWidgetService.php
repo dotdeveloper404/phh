@@ -26,7 +26,6 @@ class OrderWidgetService {
         return $this->orders->map(function($o) {
             return $o->status == 'pending';
         })->filter()->count();
-        // return $this->orders->countBy(function($o) );
     }
 
     public function totalCompletedOrders() {
@@ -34,8 +33,4 @@ class OrderWidgetService {
             return $o->status == 'completed';
         })->filter()->count();
     }
-
-
-
-    
 }

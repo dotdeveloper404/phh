@@ -7,32 +7,32 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    
+
 
     public function cartList()
     {
         // $products = Product::all();
         $deals = Deal::all();
         $cartItems = \Cart::getContent();
-        return view('frontend.cart', compact('cartItems','deals'));
-
+        return view('frontend.cart', compact('cartItems', 'deals'));
     }
 
     public function addToCart(Request $request)
     {
         \Cart::add([
             'id' => $request->id,
-            'name'=>$request->name,
-            'price'=>$request->price,
-            'quantity'=> $request->quantity,
-            'attributes'=>array(
-                'image'=>$request->image,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'attributes' => array(
+                'image' => $request->image,
+                'restaurant_id' => $request->restaurant_id
             )
-            ]);
-        
-            session()->flash('success','Product is added to cart');
+        ]);
 
-            return redirect()->route('cart.list');
+        session()->flash('success', 'Product is added to cart');
+
+        return redirect()->route('cart.list');
     }
 
     public function updateCart(Request $request)
@@ -40,18 +40,17 @@ class CartController extends Controller
         \Cart::update(
             $request->id,
             [
-                'quantity'=>[
-                    'relative'=>false,
-                    'value'=>$request->quantity
+                'quantity' => [
+                    'relative' => false,
+                    'value' => $request->quantity
                 ]
             ]
-                );
+        );
 
 
-         session()->flash('success','Item in cart updated');
+        session()->flash('success', 'Item in cart updated');
 
-         return redirect()->route('cart.list');
-                
+        return redirect()->route('cart.list');
     }
 
     public function removeCart(Request $request)
@@ -71,5 +70,4 @@ class CartController extends Controller
 
         return redirect()->route('cart.list');
     }
-
 }

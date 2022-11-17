@@ -17,7 +17,8 @@ return new class extends Migration
         Schema::dropIfExists('orders');
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(User::class, 'restaurant_id')->constrained('users');
             $table->integer('total');
             $table->string('code');
             $table->string('status')->default('pending');

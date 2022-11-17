@@ -42,7 +42,7 @@
                                 @role('Admin|Restaurant')
                                     <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
                                 @else
-                                    <li><a class="dropdown-item" href="#">My Orders</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('my-orders') }}">My Orders</a></li>
                                 @endrole
                                 <li><a class="dropdown-item" href="#" onclick="$('#logout-form').submit()">Logout</a></li>
                                 <form action="{{ route('logout') }}" method="post" id="logout-form">@csrf</form>

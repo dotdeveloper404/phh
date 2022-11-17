@@ -41,7 +41,7 @@
     <div class="container-fluid">
         <div class="p-5">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped @if(count($leads)) datatable @endif">
                     <thead>
                         <tr class="fw-bold border-bottom">
                             <th>Name</th>

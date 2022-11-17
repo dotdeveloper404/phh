@@ -25,6 +25,7 @@
                                         <input type="hidden" value="{{ $d->name }}" name="name">
                                         <input type="hidden" value="{{ $d->price }}" name="price">
                                         <input type="hidden" value="{{ $d->image }}" name="image">
+                                        <input type="hidden" value="{{ $d->restaurant_id }}" name="restaurant_id">
                                         <input type="hidden" value="1" name="quantity">
                                         <a href="javascript:void(0);" class="btn_add_to_cart"
                                             onclick="$('#add-to-cart-{{ $d->id }}').submit()">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deal;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
@@ -41,4 +42,16 @@ class HomeController extends Controller
         $deals = Deal::all();
         return view('frontend.best-deals', compact('deals'));
     }
+
+    public function my_orders()
+    {
+        // dd(Order::with(['items','user','restaurant'])->get()->groupBy(function($o) {
+        //     return $o->restaurant->name;
+        // }));
+        $active_orders = Order::with(['items.deal', 'user', 'restaurant'])->where(['user_id' => auth()->id(), 'status' => 'pending'])->orderByDesc('created_at')->get();
+        $past_orders = Order::with(['items.deal', 'user', 'restaurant'])->where('user_id', auth()->id())->where('status', '!=', 'pending')->orderByDesc('created_at')->get();
+        return view('frontend.my-orders', compact('active_orders', 'past_orders'));
+    }
 }
+
+

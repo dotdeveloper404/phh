@@ -258,7 +258,7 @@
                                     </div>
 
                                     {{-- Roles --}}
-                                    <div class="menu-item">
+                                    {{-- <div class="menu-item">
                                         <a class="menu-link @route('roles.index') active @endroute"
                                             href="{{ route('roles.index') }}">
                                             <span class="menu-icon">
@@ -268,7 +268,7 @@
                                             </span>
                                             <span class="menu-title">Roles</span>
                                         </a>
-                                    </div>
+                                    </div> --}}
 
                                     {{-- Leads --}}
                                     <div class="menu-item">

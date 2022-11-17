@@ -59,7 +59,7 @@
                 </div>
             @endif
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped @if(count($deals)) datatable @endif">
                     <thead>
                         <tr>
                             <th>Image</th>

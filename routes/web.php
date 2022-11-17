@@ -20,7 +20,6 @@ Route::middleware(['auth', 'verified', 'role:Admin|Restaurant'])->prefix('dashbo
         return view('dashboard.index');
     })->name('dashboard');
 
-    // Route::resource('product', ProductController::class);
     Route::resource('deals', DealController::class);
     Route::resource('contact', ContactController::class, [
         'only' => ['index', 'store', 'destroy']
@@ -44,6 +43,7 @@ Route::get('how-it-works', [HomeController::class, 'howitworks'])->name('home.ho
 Route::get('contact', [HomeController::class, 'contact'])->name('home.contact');
 Route::get('best-deals', [HomeController::class, 'bestdeals'])->name('home.bestdeals');
 Route::get('about', [HomeController::class, 'about'])->name('home.about');
+Route::middleware(['auth', 'role:Customer'])->get('my-orders', [HomeController::class, 'my_orders'])->name('my-orders');
 
 // Route::get('product-list', [ProductController::class, 'productList'])->name('products.list');
 Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
@@ -53,8 +53,3 @@ Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove'
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
 require __DIR__ . '/auth.php';
-
-
-// Route::get('order-test/{order}', function(Order $order) {
-//     dd($order->restaurant());
-// });

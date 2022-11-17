@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Cart;
-use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Models\{Deal, Order, OrderItem, Product};
+use App\Models\{Deal, Order, OrderItem,};
 
 class CheckoutController extends Controller
 {
@@ -27,12 +26,12 @@ class CheckoutController extends Controller
     public function doCheckout(Request $request)
     {
         try {
-            $cart = Cart::getContent()->all();
-            // dd($cart);
+            $cart = Cart::getContent();
             $user = $request->user();
 
             $order = Order::create([
                 'user_id' => $user->id,
+                'restaurant_id' => $cart->first()->attributes->restaurant_id,
                 'total' => Cart::getTotal(),
                 'code' => substr(md5(time()), 0, 6)
             ]);

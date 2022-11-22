@@ -14,7 +14,7 @@ class OrderWidgetService {
         $this->user = auth()->user();
 
         $this->orders = Order::with(['items.deal', 'user'])->get()->map(function($o) {
-            return $this->user->hasRole('Admin') ? $o : ($o->restaurant()->id == $this->user->id ? $o : null);
+            return $this->user->hasRole('Admin') ? $o : ($o->restaurant->id == $this->user->id ? $o : null);
         })->filter();
     }
 

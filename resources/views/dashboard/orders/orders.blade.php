@@ -48,7 +48,7 @@
                                 <td>{{ $order->code }}</td>
                                 <td>{{ count($order->items) }}</td>
                                 <td>{{ $order->total }}</td>
-                                <td>
+                                <td class="text-end">
                                     <button class="btn btn-primary"
                                         onclick="loadDetails({{ $order->items }})">Details</button>
                                 </td>

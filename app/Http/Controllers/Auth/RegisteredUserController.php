@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
+use App\Models\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
+use App\Models\Restaurant;
+use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {
@@ -33,25 +33,44 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+
+        $userData = $request->validate([
+            'type' => ['required', 'in:cx,res'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        if ($userData['type'] == 'cx') {
+            $cxData = $request->validate([
+                'dob' => 'required|date',
+                'dl_expiry' => 'required|date',
+                'dl_state' => 'required|string',
+                'phone' => 'required|string'
+            ]);
+        } else if ($userData['type'] == 'res') {
+            $resData = $request->validate([
+                'rest_name' => 'required|string',
+                'tax_id' => 'required|string',
+                'call_date_time' => 'required|date',
+            ]);
+        }
 
-        $user->assignRole('Customer');
-
-        event(new Registered($user));
+        $user = User::create($userData);
 
         Auth::login($user);
 
-        // return redirect(RouteServiceProvider::HOME);
-        return redirect()->route('home.index');
+        if ($userData['type'] == 'cx') {
+            $cxData = array_merge($cxData, ['user_id' => $user->id]);
+            $user->assignRole('Customer');
+            Customer::create($cxData);
+            $reponse = redirect()->route('home.index');
+        } else if ($userData['type'] == 'res') {
+            $resData = array_merge($resData, ['user_id' => $user->id]);
+            $user->assignRole('Restaurant');
+            Restaurant::create($resData);
+            $reponse = redirect(RouteServiceProvider::HOME);
+        }
+        return $reponse;
     }
 }

@@ -14,7 +14,8 @@
         ],
     ];
     $title = 'Users';
-    $canCreateUser = auth()->user()->can('user-create')
+    // $canCreateUser = auth()->user()->can('user-create')
+    $canCreateUser = false
 @endphp
 
 @extends('layouts.app', [
@@ -39,7 +40,7 @@
     @endif
 
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped @if(count($data)) datatable @endif">
         <thead>
             <tr>
                 <th>No</th>
@@ -52,7 +53,7 @@
         <tbody>
             @foreach ($data as $user)
                 <tr class="align-middle">
-                    <td>{{ ++$i }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
@@ -74,5 +75,5 @@
         </tbody>
     </table>
 
-    {!! $data->render() !!}
+    {{-- {!! $data->render() !!} --}}
 @endsection

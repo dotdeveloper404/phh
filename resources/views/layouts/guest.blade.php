@@ -24,26 +24,23 @@
         }
     </style>
 
+    @stack('styles')
+
     @vite('resources/js/app.js')
 </head>
 <!--end::Head-->
 
 <!--begin::Body-->
-
 <body id="kt_body" class="app-blank app-blank bgi-size-cover bgi-position-center bgi-no-repeat">
-
-    <!--begin::Root-->
-    <div class="d-flex flex-column flex-root justify-content-center" id="kt_app_root">
-
+    <div style="overflow-y: scroll">
         @yield('content')
-
     </div>
-    <!--end::Root-->
-
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
     <script src="{{ asset('dashboard-assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('dashboard-assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
+
+    @stack('scripts')
 
 </body>
 <!--end::Body-->

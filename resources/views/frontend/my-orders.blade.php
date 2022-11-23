@@ -1,4 +1,3 @@
-{{-- @dd($active_orders, $past_orders) --}}
 @extends('app')
 
 @section('title', 'My Orders')
@@ -42,7 +41,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6">No Active orders</td>
+                                <td colspan="6" class="text-center">No Active orders</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -75,7 +74,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6">No Active orders</td>
+                                <td colspan="6" class="text-center">No Past orders</td>
                             </tr>
                         @endforelse
                     </tbody>

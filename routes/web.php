@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\User;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{CartController, HomeController, RoleController, OrderController, ContactController, ProductController, CheckoutController, DealController, UserController};
-use App\Models\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,9 @@ Route::middleware(['auth', 'verified', 'role:Admin|Restaurant'])->prefix('dashbo
     Route::get('order', [OrderController::class, 'index'])->name('order.index');
 
     Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class, [
+        'except' => ['create']
+    ]);
     
 });
 
@@ -53,3 +56,7 @@ Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove'
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
 require __DIR__ . '/auth.php';
+
+Route::get('abc', function() {
+    dd(User::all());
+});

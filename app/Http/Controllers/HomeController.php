@@ -10,9 +10,6 @@ class HomeController extends Controller
 
     public function index()
     {
-
-        // $products = Product::all();
-        // return view('frontend.index', compact('products'));
         $deals = Deal::all();
         return view('frontend.index', compact('deals'));
     }
@@ -45,9 +42,6 @@ class HomeController extends Controller
 
     public function my_orders()
     {
-        // dd(Order::with(['items','user','restaurant'])->get()->groupBy(function($o) {
-        //     return $o->restaurant->name;
-        // }));
         $active_orders = Order::with(['items.deal', 'user', 'restaurant'])->where(['user_id' => auth()->id(), 'status' => 'pending'])->orderByDesc('created_at')->get();
         $past_orders = Order::with(['items.deal', 'user', 'restaurant'])->where('user_id', auth()->id())->where('status', '!=', 'pending')->orderByDesc('created_at')->get();
         return view('frontend.my-orders', compact('active_orders', 'past_orders'));

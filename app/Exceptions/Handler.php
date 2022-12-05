@@ -14,7 +14,7 @@ class Handler extends ExceptionHandler
      */
     protected $levels = [
         //
-        
+        //test
     ];
 
     /**

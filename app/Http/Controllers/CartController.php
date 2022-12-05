@@ -12,6 +12,7 @@ class CartController extends Controller
     public function cartList()
     {
         // $products = Product::all();
+        //test
         $deals = Deal::all();
         $cartItems = \Cart::getContent();
         return view('frontend.cart', compact('cartItems', 'deals'));

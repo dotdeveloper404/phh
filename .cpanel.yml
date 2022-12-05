@@ -3,7 +3,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/illustra/public_html/custom.illustrationwizard.com/phh
-   - export DEPLOYPATH=/home/example/public_html/
     - /bin/cp -R images $DEPLOYPATH
     - /bin/cp -R app $DEPLOYPATH
     - /bin/cp -R bootstrap $DEPLOYPATH

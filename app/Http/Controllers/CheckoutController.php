@@ -13,6 +13,8 @@ class CheckoutController extends Controller
 
     public function index()
     {
+
+        
         $cart = Cart::getContent();
         if ($cart->isEmpty()) {
             return redirect()->route('cart.list')->with('error', 'Add products to your cart first.');

@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Order;
+use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{CartController, HomeController, RoleController, OrderController, ContactController, ProductController, CheckoutController, DealController, UserController};
 
@@ -56,7 +57,3 @@ Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove'
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
 require __DIR__ . '/auth.php';
-
-Route::get('abc', function() {
-    dd(User::all());
-});

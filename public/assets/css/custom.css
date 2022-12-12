@@ -381,7 +381,7 @@ header nav ul li a:hover{
     width: 540px;
     height: 350px;
 } */
-.deals-list li {
+.deals-item {
     display: inline-block;
     width: 48%;
     margin-bottom: 50px;

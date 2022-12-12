@@ -41,6 +41,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $userData['password'] = bcrypt($userData['password']);
+
         if ($userData['type'] == 'cx') {
             $cxData = $request->validate([
                 'dob' => 'required|date',

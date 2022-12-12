@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\File;
 
 class DealController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Restaurant', [
+            'only' => ['create', 'store']
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -22,8 +22,8 @@
     'breadcrumbs' => $breadcrumbs,
     'addButton' => true,
     'btn' => [
-        'text' => 'Add Deal',
-        'link' => route('deals.create'),
+        'text' => auth()->user()->hasRole('Restaurant') ? 'Add Deal' : 'Back',
+        'link' => auth()->user()->hasRole('Restaurant') ? route('deals.create') : url()->previous(),
     ],
 ])
 

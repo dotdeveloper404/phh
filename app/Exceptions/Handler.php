@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -48,5 +51,17 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if($this->isHttpException($e) && $e instanceof UnauthorizedException) {
+            return match (true) {
+                auth()->user()->hasRole('Restaurant') => redirect(RouteServiceProvider::HOME),
+                auth()->user()->hasRole('Customer') => redirect()->route('home.index'),
+            };
+        }
+
+        return parent::render($request, $e);
     }
 }

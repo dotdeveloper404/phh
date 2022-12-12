@@ -9,7 +9,7 @@
             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <ul class="deals-list">
                     @foreach ($deals as $d)
-                        <li>
+                        <li class="deals-item">
                             <div class="list-data">
                                 <div class="deals-img">
                                     <img src="{{ asset("uploads/$d->image") }}" alt="Product image">

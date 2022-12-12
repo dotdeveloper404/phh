@@ -252,8 +252,9 @@
                         <div class="fv-row mb-8">
                             <!--begin::Email-->
                             <label for="call" class="form-label"><b>Call Time</b></label>
-                            <input type="datetime-local" name="call_date_time" value="{{ old('call_date_time') }}" id="call" min="2022-11-23T00:00" max="2022-11-23T23:59"
+                            <input type="datetime-local" name="call_date_time" value="{{ old('call_date_time') }}" id="call" min='{{ date('Y-m-d')."T00:00" }}' max="{{ date('Y-m-d')."T23:59" }}"
                                 class="form-control bg-transparent @error('call_date_time') is-invalid @enderror" required />
+                            <small class="form-text text-muted">You will received a call from us at this time</small>
                             @error('call_date_time')
                                 <div class="invalid-feedback">
                                     {{ $message }}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderPlaced;
 use Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -49,15 +50,7 @@ class CheckoutController extends Controller
 
             Cart::clear();
 
-            // Sending email to admins, user
-            // @TODO add restaurant email to emails array
-            $order->load('items', 'user');
-            $adminEmails = User::role('Admin')->get()->map(function($u) {
-                return $u->email;
-            })->all();
-            $emails = [$user->email, ...$adminEmails];
-
-            // $this->sendEmailAfterCheckout($emails, $order);
+            event(new OrderPlaced($order));
 
             return redirect()->route('home.index')->with('order_placed', [
                 'success' => true,
